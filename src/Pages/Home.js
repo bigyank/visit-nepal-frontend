@@ -1,7 +1,14 @@
-import React from "react";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const Home = () => {
-  return <div>This is a home page</div>;
+  let history = useHistory();
+
+  useEffect(() => {
+    history.push("/login");
+  }, [history]);
+
+  return null;
 };
 
 export default Home;
