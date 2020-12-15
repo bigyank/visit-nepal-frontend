@@ -4,6 +4,7 @@ import Header from "./Components/Header";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
+import ExplorePage from "./Pages/ExplorePage";
 import NotFoundPage from "./Pages/NotFoundPage";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignupPage} />
+        <Route path="/explore" component={ExplorePage} />
         <AuthRoute path="/" exact component={HomePage} />
         <Route path="*" component={NotFoundPage} />
       </Switch>
