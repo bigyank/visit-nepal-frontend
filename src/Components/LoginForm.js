@@ -1,27 +1,32 @@
+import { useMutation } from "react-query";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { Button, LinearProgress, Box } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
-
-const validator = yup.object({
-  email: yup.string().email().required(),
-  password: yup.string().required(),
-});
+import { loginUser } from "../services/auth";
 
 const LoginForm = () => {
+  const [mutateLoginUser] = useMutation(loginUser);
+
+  const validator = yup.object({
+    email: yup.string().email().required(),
+    password: yup.string().required(),
+  });
+
+  const loginFormHandler = async (values, { setSubmitting }) => {
+    await mutateLoginUser(values);
+  };
+
+  const formInitValues = {
+    email: "",
+    password: "",
+  };
+
   return (
     <Formik
-      initialValues={{
-        email: "",
-        password: "",
-      }}
+      initialValues={formInitValues}
       validationSchema={validator}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          setSubmitting(false);
-          alert(JSON.stringify(values, null, 2));
-        }, 500);
-      }}
+      onSubmit={loginFormHandler}
     >
       {({ submitForm, isSubmitting }) => (
         <Form>
@@ -45,7 +50,9 @@ const LoginForm = () => {
               fullWidth
             />
           </Box>
+
           {isSubmitting && <LinearProgress />}
+
           <Box mb={2}>
             <Button
               variant="contained"
