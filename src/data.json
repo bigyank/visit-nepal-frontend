@@ -1,0 +1,130 @@
+[
+  {
+    "name": "Akash Bhairab Temple ",
+    "lat": "27.706066",
+    "lon": "85.309706",
+    "type": "Religious",
+    "image": "images/akashbhairab.jpg",
+    "description": "Akash Bhairav (NepalBhasa: आजु, Āaju) is one of the different forms of Bhairava. He is known as King Yalambar in History of Nepal, as Barbarika in Mahabharata and Āaju meaning First King in NepalBhasa."
+  },
+  {
+    "name": "Boudhanath",
+    "lat": "27.721401",
+    "lon": "85.362786",
+    "type": "Religious",
+    "image": "images/bouddhanath.jpg",
+    "description": "Boudha is a stupa in Kathmandu, Nepal. Located about 11 km from the center and northeastern outskirts of Kathmandu, its massive mandala makes it one of the largest spherical stupas in Nepal and the world."
+  },
+  {
+    "name": "Changu Narayan",
+    "lat": "27.716504",
+    "lon": "85.428013",
+    "type": "Religious",
+    "image": "images/changu.jpg",
+    "description": "The ancient Hindu temple of Changu Narayan is located on a high hilltop that is also known as Changu or Dolagiri. The temple was surrounded by champak tree forest and a small village known as Changu. The temple is located in Changunarayan Municipality of Bhaktapur District, Nepal."
+  },
+  {
+    "name": "Degu Taleju Temple",
+    "lat": "27.705064",
+    "lon": "85.307517",
+    "type": "Religious",
+    "image": "images/taleju.jpg",
+    "description": "Degu Taleju Temple is another triple roofed temple built by Shiva Singh Malla that is also dedicated to Taleju. Mul Chowk, dedicated to Taleju Bhawani, is a courtyard with two-storied buildings all round that are exclusive places for religious rites."
+  },
+  {
+    "name": "Durbar Square (Basantapur Darbar Kshetra)",
+    "lat": "27.704206",
+    "lon": "85.306294",
+    "type": "Attraction/Landmark",
+    "image": "images/durbarsquare.jpg",
+    "description": "Kathmandu Durbar Square in front of the old royal palace of the former Kathmandu Kingdom is one of three Durbar Squares in the Kathmandu Valley in Nepal, all of which are UNESCO World Heritage Sites. Several buildings in the Square collapsed due to a major earthquake on 25 April 2015."
+  },
+  {
+    "name": "Freak Street",
+    "lat": "27.703625",
+    "lon": "85.305973",
+    "type": "Attraction/Landmark",
+    "image": "images/freakstreet.jpg",
+    "description": "Freak Street is a narrow street situated south of Durbar Square. It is a fun place to shop for Tibetan woolen garments, jackets and mittens. Be sure to buy quality textile, else it will fall apart the very next day. Among Nepal's famous bargains are kit bags, caps and clothes made from black felt with rainbow fringes."
+  },
+  {
+    "name": "Garden of Dreams",
+    "lat": "27.713922",
+    "lon": "85.314821",
+    "type": "Attraction/Landmark",
+    "image": "images/gardenofdreams.jpg",
+    "description": "The Garden of Dreams, also, the Garden of Six Seasons, is a neo-classical garden in Kaiser Mahal Kathmandu, Nepal, built in 1920. Designed by Kishore Narshingh, it consists of 6,895 square metres of gardens with three pavilions, an amphitheater, ponds, pergolas, and urns."
+  },
+  {
+    "name": "Hanumandhoka Palace",
+    "lat": "27.704539",
+    "lon": "85.307366",
+    "type": "Attraction/Landmark",
+    "image": "images/hanumandhoka.jpg",
+    "description": "Hanuman Dhoka is a complex of structures with the Royal Palace of the Malla kings and also of the Shah dynasty in the Durbar Square of central Kathmandu, Nepal. It is spread over five acres. The Hanuman Dhoka Palace gets its name from the stone image of Hanuman, the Hindu deity, that sits near the main entryway."
+  },
+  {
+    "name": "Kaiser Library",
+    "lat": "27.714995",
+    "lon": "85.314970",
+    "type": "Attraction/Landmark",
+    "image": "images/kaiser.jpg",
+    "description": "The Kaiser Library is a government-run public library in Kathmandu, Nepal. It is located in the Keshar Mahal palace complex. The library was established by Chandra Shumsher Jang Bahadur Rana for his son, Kaiser Shumsher Rana, in 1907. The library hosts some rare and ancient books on Buddhism, Tantrism and astrology."
+  },
+  {
+    "name": "Kasthamandap Temple",
+    "lat": "27.704023",
+    "lon": "85.305842",
+    "type": "Religious",
+    "image": "images/kasthamandap.jpg",
+    "description": "Kasthamandap was a three-storied public shelter that included a shrine consecrated to Gorakshanath situated at Maru, Kathmandu, Nepal. Several myths and stories about the date of the construction of the Kasthamandap Temple have been resolved with the recent archeological findings."
+  },
+  {
+    "name": "Makhan Tole",
+    "lat": "27.705533",
+    "lon": "85.308807",
+    "type": "Shopping",
+    "image": "images/makhan.jpg",
+    "description": "Makhan Tole, also known as Makhan Tol, is situated north of the famous Durbar Square. This area is popular among shoppers because here thangka, paubha and other fine arts are sold by numerous dealers. A thangka is a form of art, widespread in Tibet. It is a piece of silk on which Buddhist deities or mandalas are embroidered."
+  },
+  {
+    "name": "Narayanhiti Royal Palace",
+    "lat": "27.713466",
+    "lon": "85.318080",
+    "type": "Attraction/Landmark",
+    "image": "images/narayanhiti.jpg",
+    "description": "The Narayanhiti Palace Museum is a public museum in Kathmandu, Nepal located east of the Kaiser Mahal and next to Thamel. The museum was created in 2008 from the complex of the former Narayanhiti Palace following the 2006 revolution."
+  },
+  {
+    "name": "National Museum of Nepal",
+    "lat": "27.705935",
+    "lon": "85.289498",
+    "type": "Attraction/Landmark",
+    "image": "images/nationalmuseum.jpg",
+    "description": "The National Museum of Nepal is a popular attraction of the capital city of Kathmandu. About a century old, the museum stands as a tourist destination and historical symbol for Nepal."
+  },
+  {
+    "name": "Pashupatinath Temple",
+    "lat": "27.711006",
+    "lon": "85.347099",
+    "type": "Religious",
+    "image": "images/pashupatinath.jpg",
+    "description": "The Pashupatinath Temple is a famous and sacred Hindu temple complex that is located on the banks of the Bagmati River, approximately 5 km north-east of Kathmandu in the eastern part of Kathmandu Valley, the capital of Nepal. The temple serves as the seat of Pashupatinath."
+  },
+  {
+    "name": "Swayambhunath",
+    "lat": "27.714321",
+    "lon": "85.293584",
+    "type": "Religious",
+    "image": "images/swyambhunath.jpg",
+    "description": "Swayambhu is an ancient religious complex atop a hill in the Kathmandu Valley, west of Kathmandu city. The Tibetan name for the site means 'Sublime Trees', for the many varieties of trees found on the hill."
+  },
+  {
+    "name": "Thamel Neighborhood",
+    "lat": "27.714412",
+    "lon": "85.311528",
+    "type": "Shopping",
+    "image": "images/thamel.jpg",
+    "description": "Thamel is a popular tourist destination in Kathmandu. Thamel has been the center of the tourist industry in Kathmandu for over two decades, growing up between two of the original hotels, the Kathmandu Guesthouse and Hotel Utse. Even though Thamel has been referred to as the 'ghetto' by some, most low-budget travelers consider it a tourist haven."
+  }
+]
