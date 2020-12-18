@@ -1,11 +1,11 @@
 import { Grid, Typography, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ContributeForm from "../Components/contributeForm";
+import ContributeForm from "../Components/ContributeForm";
 
 const useStyles = makeStyles({
   paperStyles: {
     padding: "2rem 3rem",
-    marginTop: "1.5rem",
+    margin: "1.5rem 0",
   },
   loginStyles: {
     marginTop: "2rem",

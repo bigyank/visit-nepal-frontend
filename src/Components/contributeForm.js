@@ -1,3 +1,4 @@
+import { useState } from "react";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
 import {
@@ -9,11 +10,13 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Select } from "formik-material-ui";
+
 import ContributeMap from "./ContributeMap";
+import SearchFeild from "./PlacesSearch";
 
 const validator = yup.object({
-  firstname: yup.string().required(),
-  email: yup.string().email().required(),
+  name: yup.string().required(),
+  description: yup.string().required(),
 });
 
 const useStyles = makeStyles({
@@ -23,14 +26,16 @@ const useStyles = makeStyles({
 });
 
 const ContributeForm = () => {
+  const [location, setLocation] = useState([27.7172, 85.324]);
   const classes = useStyles();
 
   return (
     <Formik
       initialValues={{
-        firstname: "",
-        email: "",
-        type: "",
+        name: "",
+        description: "",
+        type: "landmark",
+        location: [27.7172, 85.324],
       }}
       validationSchema={validator}
       onSubmit={(values, { setSubmitting }) => {
@@ -40,14 +45,14 @@ const ContributeForm = () => {
         }, 500);
       }}
     >
-      {({ submitForm, isSubmitting }) => (
+      {({ submitForm, isSubmitting, setValues, values }) => (
         <Form>
           <Box mb={3}>
             <Field
               className={classes.textFeildStyles}
               component={TextField}
               variant="outlined"
-              name="firstname"
+              name="name"
               type="text"
               label="First Name"
             />
@@ -57,14 +62,17 @@ const ContributeForm = () => {
             <Field
               component={TextField}
               variant="outlined"
-              name="email"
-              type="email"
-              label="Email"
+              multiline
+              name="description"
+              type="text"
+              label="Description"
               fullWidth
             />
           </Box>
-          <Box mb={3}>
-            <InputLabel htmlFor="type">Type</InputLabel>
+          <Box mb={4}>
+            <Box mb={1}>
+              <InputLabel htmlFor="type">Type</InputLabel>
+            </Box>
             <Field
               style={{ height: "2rem" }}
               component={Select}
@@ -81,7 +89,11 @@ const ContributeForm = () => {
           </Box>
 
           <Box mb={2}>
-            <ContributeMap />
+            <SearchFeild />
+          </Box>
+
+          <Box mb={2}>
+            <ContributeMap setValues={setValues} values={values} />
           </Box>
 
           {isSubmitting && <LinearProgress />}

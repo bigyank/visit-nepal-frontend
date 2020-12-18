@@ -1,18 +1,33 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "../styles/map.css";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvent,
+} from "react-leaflet";
 import data from "../data.json";
 
 const Map = () => {
+  function SetViewOnClick() {
+    const map = useMapEvent("click", (e) => {
+      map.setView(e.latlng, map.getZoom(), {
+        animate: true,
+      });
+    });
+
+    return null;
+  }
+
   return (
     <div>
       <MapContainer
+        style={{ height: "90vh", width: "100%" }}
         center={[27.7172, 85.324]}
         zoom={13}
-        scrollWheelZoom={false}
       >
         <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
+          url="https://api.mapbox.com/styles/v1/notauser/ckiu5pj582km519s3ey4hwl1b/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoibm90YXVzZXIiLCJhIjoiY2tpdTVydzB6MnV0dDJxbGIyczBlaHB1dCJ9.xlDmN1f-Pec6BoR6PQywTg"
         />
         {data.map((info, index) => (
           <Marker key={index} position={[info.lat, info.lon]}>
@@ -30,6 +45,7 @@ const Map = () => {
             </Popup>
           </Marker>
         ))}
+        <SetViewOnClick />
       </MapContainer>
     </div>
   );

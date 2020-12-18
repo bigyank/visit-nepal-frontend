@@ -5,10 +5,8 @@ import "fontsource-roboto";
 import App from "./App";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <CssBaseline>
-      <App />
-    </CssBaseline>
-  </React.StrictMode>,
+  <CssBaseline>
+    <App />
+  </CssBaseline>,
   document.getElementById("root")
 );
