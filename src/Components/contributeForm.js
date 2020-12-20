@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { app } from "../firebaase";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
 import {
@@ -7,12 +8,14 @@ import {
   Box,
   MenuItem,
   InputLabel,
+  Grid,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Select } from "formik-material-ui";
 
 import ContributeMap from "./ContributeMap";
-import SearchFeild from "./PlacesSearch";
+import PlacesSearch from "./PlacesSearch";
+import UploadButton from "./UploadButton";
 
 const validator = yup.object({
   name: yup.string().required(),
@@ -25,6 +28,17 @@ const useStyles = makeStyles({
   },
 });
 
+const uploadImage = async (img) => {
+  try {
+    const storageRef = app.storage().ref();
+    const fileRef = storageRef.child(img.name);
+    await fileRef.put(img);
+    return fileRef.getDownloadURL();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const ContributeForm = () => {
   const [location, setLocation] = useState([27.7172, 85.324]);
   const classes = useStyles();
@@ -36,9 +50,14 @@ const ContributeForm = () => {
         description: "",
         type: "landmark",
         location: [27.7172, 85.324],
+        img: "/images/sample.jpg",
       }}
       validationSchema={validator}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting }) => {
+        if (typeof values.img !== "string") {
+          const uploadedImg = await uploadImage(values.img);
+          values.img = uploadedImg;
+        }
         setTimeout(() => {
           setSubmitting(false);
           alert(JSON.stringify(values, null, 2));
@@ -54,7 +73,7 @@ const ContributeForm = () => {
               variant="outlined"
               name="name"
               type="text"
-              label="First Name"
+              label="Name"
             />
           </Box>
 
@@ -88,12 +107,29 @@ const ContributeForm = () => {
             </Field>
           </Box>
 
-          <Box mb={2}>
-            <SearchFeild />
+          <Box mb={4}>
+            <Grid
+              container
+              justify="space-around"
+              alignItems="center"
+              spacing={2}
+            >
+              <Grid item md={4}>
+                <UploadButton setValues={setValues} values={values} />
+              </Grid>
+              <Grid item md={4}>
+                <PlacesSearch setLocation={setLocation} />
+              </Grid>
+            </Grid>
           </Box>
 
           <Box mb={2}>
-            <ContributeMap setValues={setValues} values={values} />
+            <ContributeMap
+              setValues={setValues}
+              values={values}
+              location={location}
+              setLocation={setLocation}
+            />
           </Box>
 
           {isSubmitting && <LinearProgress />}

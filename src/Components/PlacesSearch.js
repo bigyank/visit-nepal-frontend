@@ -1,36 +1,42 @@
-import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Typography } from "@material-ui/core";
 
 const URL =
   "http://api.geonames.org/searchJSON?username=ksuhiyp&country=np&maxRows=1000&style=SHORT";
 
+const useStyles = makeStyles((theme) => ({
+  typo: {
+    marginBottom: "10px",
+  },
+}));
+
 const PlacesSearch = ({ setLocation }) => {
-  const [place, setPlace] = useState(null);
+  const classes = useStyles();
   const { data, isLoading } = useQuery("cities", async () => {
     const response = await axios.get(URL);
     return response.data;
   });
 
-  useEffect(() => {
-    console.log(place);
-  }, [place]);
-
   if (isLoading) return <CircularProgress />;
 
   return (
     <>
+      <Typography color="textSecondary" className={classes.typo}>
+        Search
+      </Typography>
       <Autocomplete
         id="combo-box-demo"
         onChange={(_event, newValue) => {
-          setPlace(newValue);
+          if (newValue == null) return;
+          setLocation([newValue.lat, newValue.lng]);
         }}
         options={data.geonames}
         getOptionLabel={(option) => option.name}
-        style={{ width: 300 }}
         renderInput={(params) => (
           <TextField {...params} label="Search City" variant="outlined" />
         )}
