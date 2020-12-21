@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
   typo: {
     marginBottom: "10px",
   },
+  btn: {
+    height: "3.5rem",
+  },
 }));
 
 const UploadButton = ({ setValues, values }) => {
@@ -40,7 +43,8 @@ const UploadButton = ({ setValues, values }) => {
       />
       <label htmlFor="contained-button-file">
         <Button
-          variant="contained"
+          className={classes.btn}
+          variant="outlined"
           color="primary"
           startIcon={<PhotoCamera />}
           component="span"

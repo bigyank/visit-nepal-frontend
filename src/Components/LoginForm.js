@@ -1,12 +1,16 @@
 import { useMutation } from "react-query";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../user-contex";
 import { Button, LinearProgress, Box } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { loginUser } from "../services/auth";
 
 const LoginForm = () => {
+  const [, userDispatch] = useAuth();
   const [mutateLoginUser] = useMutation(loginUser);
+  const history = useHistory();
 
   const validator = yup.object({
     email: yup.string().email().required(),
@@ -15,6 +19,8 @@ const LoginForm = () => {
 
   const loginFormHandler = async (values, { setSubmitting }) => {
     await mutateLoginUser(values);
+    userDispatch({ type: "login", payload: { user: true } });
+    history.push("/");
   };
 
   const formInitValues = {

@@ -26,6 +26,9 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             Visit Nepal
           </Typography>
+          <Button component={Link} to="/" color="inherit">
+            Home
+          </Button>
           <Button component={Link} to="/explore" color="inherit">
             Explore
           </Button>

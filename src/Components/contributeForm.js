@@ -110,8 +110,8 @@ const ContributeForm = () => {
           <Box mb={4}>
             <Grid
               container
-              justify="space-around"
-              alignItems="center"
+              justify="space-between"
+              alignItems="flex-start"
               spacing={2}
             >
               <Grid item md={4}>
@@ -123,7 +123,7 @@ const ContributeForm = () => {
             </Grid>
           </Box>
 
-          <Box mb={2}>
+          <Box mb={4}>
             <ContributeMap
               setValues={setValues}
               values={values}
