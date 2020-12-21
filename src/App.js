@@ -7,6 +7,8 @@ import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
 import ExplorePage from "./Pages/ExplorePage";
 import ContributePage from "./Pages/ContributePage";
+import ForgotPassPage from "./Pages/ForgotPassPage";
+import ResetPassPage from "./Pages/ResetPassPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -21,7 +23,9 @@ function App() {
         <Route path="/signup" component={SignupPage} />
         <Route path="/explore" component={ExplorePage} />
         <Route path="/contribute" component={ContributePage} />
-        <AuthRoute path="/" exact component={HomePage} />
+        <Route exact path="/password/request" component={ForgotPassPage} />
+        <Route path="/password/recover/:id" component={ResetPassPage} />
+        <AuthRoute exact path="/" component={HomePage} />
         <Route path="*" component={NotFoundPage} />
       </Switch>
     </Router>

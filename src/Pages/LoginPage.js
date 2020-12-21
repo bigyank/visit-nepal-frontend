@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import { Grid, Typography, Button, Link, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { GTranslate } from "@material-ui/icons/";
@@ -15,9 +16,13 @@ const useStyles = makeStyles({
 });
 
 const Login = () => {
+  const history = useHistory();
   const classes = useStyles();
 
-  const preventDefault = (event) => event.preventDefault();
+  const pushToForgotPass = (event) => {
+    event.preventDefault();
+    history.push("/password/request");
+  };
 
   const handleGoogleOauth = () => {
     window.location.href = "http://localhost:4000/api/auth/google";
@@ -61,7 +66,7 @@ const Login = () => {
 
             <FormikForm />
 
-            <Link href="#" onClick={preventDefault}>
+            <Link href="#" onClick={pushToForgotPass}>
               <Typography align="center">I forgot my password</Typography>
             </Link>
           </Paper>

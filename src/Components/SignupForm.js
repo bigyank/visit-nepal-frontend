@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useMutation } from "react-query";
 import { Formik, Form, Field } from "formik";
 import { toast } from "react-toastify";
@@ -22,11 +23,20 @@ const useStyles = makeStyles({
   },
 });
 
+const formInitValues = {
+  firstname: "",
+  lastname: "",
+  email: "",
+  password: "",
+};
+
 const SignupForm = () => {
+  const formRef = useRef();
   const classes = useStyles();
 
   const [mutateSignupUser] = useMutation(signupUser, {
     onSuccess: () => {
+      formRef.current.resetForm();
       toast.info("Please Comfirm your email");
     },
     onError: (error) => {
@@ -37,12 +47,8 @@ const SignupForm = () => {
 
   return (
     <Formik
-      initialValues={{
-        firstname: "",
-        lastname: "",
-        email: "",
-        password: "",
-      }}
+      innerRef={formRef}
+      initialValues={formInitValues}
       validationSchema={validator}
       onSubmit={async (values, { setSubmitting }) => {
         await mutateSignupUser(values);

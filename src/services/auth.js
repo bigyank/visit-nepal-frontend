@@ -15,3 +15,11 @@ export const signupUser = async (credentials) => {
   });
   return response.data;
 };
+
+export const requestPassReset = async (credentials) => {
+  const response = await axios.post(
+    BASE_URL.concat("/password/recover/request"),
+    credentials
+  );
+  return response.data;
+};
