@@ -40,7 +40,11 @@ const SignupForm = () => {
       toast.info("Please Comfirm your email");
     },
     onError: (error) => {
-      const errMessage = error.response.data.error.message;
+      const errMessage =
+        error.response && error.response.data.error
+          ? error.response.data.error.message
+          : error.message;
+
       toast.error(errMessage);
     },
   });

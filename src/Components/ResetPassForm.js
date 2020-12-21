@@ -1,16 +1,18 @@
+import { useHistory } from "react-router-dom";
 import { useMutation } from "react-query";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import { Button, LinearProgress, Box } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
-import { requestPassReset } from "../services/auth";
+import { confirmPassReset } from "../services/auth";
 
 const validator = yup.object({
   password: yup.string().required(),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password")], "Passwords must match"),
+    .required("confirm password is a required feild")
+    .oneOf([yup.ref("password")], "Passwords does not match"),
 });
 
 const formInitValues = {
@@ -18,13 +20,20 @@ const formInitValues = {
   confirmPassword: "",
 };
 
-const ResetPassForm = () => {
-  const [mutatePassRequest] = useMutation(requestPassReset, {
+const ResetPassForm = ({ id }) => {
+  const history = useHistory();
+
+  const [mutatePassReset] = useMutation(confirmPassReset, {
     onSuccess: () => {
-      toast.info("confirm your email");
+      toast.info("password reset sucessful");
+      history.push("/login");
     },
     onError: (error) => {
-      const errMessage = error.response.data.error.message;
+      const errMessage =
+        error.response && error.response.data.error
+          ? error.response.data.error.message
+          : error.message;
+
       toast.error(errMessage);
     },
   });
@@ -34,8 +43,8 @@ const ResetPassForm = () => {
       initialValues={formInitValues}
       validationSchema={validator}
       onSubmit={async (values, { setSubmitting }) => {
-        // await mutatePassRequest(values);
-        console.log(values);
+        await mutatePassReset({ id, credentials: values });
+        setSubmitting(false);
       }}
     >
       {({ submitForm, isSubmitting }) => (
@@ -71,7 +80,7 @@ const ResetPassForm = () => {
               disabled={isSubmitting}
               onClick={submitForm}
             >
-              Email Me
+              Reset Password
             </Button>
           </Box>
         </Form>

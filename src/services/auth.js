@@ -23,3 +23,11 @@ export const requestPassReset = async (credentials) => {
   );
   return response.data;
 };
+
+export const confirmPassReset = async ({ id, credentials }) => {
+  const response = await axios.post(
+    BASE_URL.concat(`/password/recover/confirm/${id}`),
+    credentials
+  );
+  return response.data;
+};

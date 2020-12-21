@@ -12,7 +12,8 @@ const useStyles = makeStyles({
   },
 });
 
-const ResetPassPage = () => {
+const ResetPassPage = ({ match }) => {
+  const { id } = match.params;
   const classes = useStyles();
 
   return (
@@ -30,7 +31,7 @@ const ResetPassPage = () => {
             </Typography>
           </Box>
           <Box mb={2}>
-            <ResetPassForm />
+            <ResetPassForm id={id} />
           </Box>
         </Paper>
       </Grid>
