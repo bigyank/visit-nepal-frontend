@@ -3,36 +3,43 @@ import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../user-contex";
+import { toast } from "react-toastify";
 import { Button, LinearProgress, Box } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { loginUser } from "../services/auth";
 
+const validator = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
+
+const formInitValues = {
+  email: "",
+  password: "",
+};
+
 const LoginForm = () => {
-  const [, userDispatch] = useAuth();
-  const [mutateLoginUser] = useMutation(loginUser);
   const history = useHistory();
-
-  const validator = yup.object({
-    email: yup.string().email().required(),
-    password: yup.string().required(),
+  const [, userDispatch] = useAuth();
+  const [mutateLoginUser] = useMutation(loginUser, {
+    onSuccess: (userData) => {
+      userDispatch({ type: "login", payload: userData });
+      history.push("/");
+    },
+    onError: (error) => {
+      const errMessage = error.response.data.error.message;
+      toast.error(errMessage);
+    },
   });
-
-  const loginFormHandler = async (values, { setSubmitting }) => {
-    await mutateLoginUser(values);
-    userDispatch({ type: "login", payload: { user: true } });
-    history.push("/");
-  };
-
-  const formInitValues = {
-    email: "",
-    password: "",
-  };
 
   return (
     <Formik
       initialValues={formInitValues}
       validationSchema={validator}
-      onSubmit={loginFormHandler}
+      onSubmit={async (values, { setSubmitting }) => {
+        await mutateLoginUser(values);
+        setSubmitting(false);
+      }}
     >
       {({ submitForm, isSubmitting }) => (
         <Form>

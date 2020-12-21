@@ -10,14 +10,13 @@ export const AuthRoute = ({ component: Component, ...rest }) => {
   // set query according to the user contex
   const { error, isLoading, data, refetch } = useQuery(
     "fetchUsers",
-    async () => await axios("/api/user", { withCredentials: true }),
+    async () => (await axios("/api/user", { withCredentials: true })).data,
     { retry: false, enabled: !userState.user }
   );
 
   // only fetch user if user is null in user contex
   useEffect(() => {
     if (!userState.user) {
-      // refetch user
       refetch();
     }
   }, [userState, refetch]);

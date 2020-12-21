@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { AuthRoute } from "./Components/AuthRoute";
 import Header from "./Components/Header";
 import HomePage from "./Pages/HomePage";
@@ -8,10 +9,13 @@ import ExplorePage from "./Pages/ExplorePage";
 import ContributePage from "./Pages/ContributePage";
 import NotFoundPage from "./Pages/NotFoundPage";
 
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <Router>
       <Header />
+      <ToastContainer position="bottom-right" />
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignupPage} />

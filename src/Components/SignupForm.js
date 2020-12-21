@@ -1,8 +1,13 @@
-import * as yup from "yup";
+import { useMutation } from "react-query";
 import { Formik, Form, Field } from "formik";
+import { toast } from "react-toastify";
+import * as yup from "yup";
+
 import { Button, LinearProgress, Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "formik-material-ui";
+
+import { signupUser } from "../services/auth";
 
 const validator = yup.object({
   firstname: yup.string().required(),
@@ -20,6 +25,16 @@ const useStyles = makeStyles({
 const SignupForm = () => {
   const classes = useStyles();
 
+  const [mutateSignupUser] = useMutation(signupUser, {
+    onSuccess: () => {
+      toast.info("Please Comfirm your email");
+    },
+    onError: (error) => {
+      const errMessage = error.response.data.error.message;
+      toast.error(errMessage);
+    },
+  });
+
   return (
     <Formik
       initialValues={{
@@ -29,11 +44,9 @@ const SignupForm = () => {
         password: "",
       }}
       validationSchema={validator}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          setSubmitting(false);
-          alert(JSON.stringify(values, null, 2));
-        }, 500);
+      onSubmit={async (values, { setSubmitting }) => {
+        await mutateSignupUser(values);
+        setSubmitting(false);
       }}
     >
       {({ submitForm, isSubmitting }) => (

@@ -17,6 +17,10 @@ const useStyles = makeStyles({
 const Signup = () => {
   const classes = useStyles();
 
+  const handleGoogleOauth = () => {
+    window.location.href = "http://localhost:4000/api/auth/google";
+  };
+
   return (
     <Grid
       className={classes.loginStyles}
@@ -41,6 +45,7 @@ const Signup = () => {
               size="large"
               startIcon={<GTranslate />}
               fullWidth
+              onClick={handleGoogleOauth}
             >
               Sign up with Google
             </Button>

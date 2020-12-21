@@ -19,48 +19,55 @@ const Login = () => {
 
   const preventDefault = (event) => event.preventDefault();
 
+  const handleGoogleOauth = () => {
+    window.location.href = "http://localhost:4000/api/auth/google";
+  };
+
   return (
-    <Grid
-      className={classes.loginStyles}
-      container
-      justify="center"
-      alignContent="center"
-    >
-      <Grid item xs={10} md={6} lg={5}>
-        <Paper className={classes.paperStyles}>
-          <Box mb={2} fontWeight="fontWeightBold">
-            <Typography variant="h5" component="h1" align="center">
-              Welcome Back!
-            </Typography>
-            <Typography component="h2" align="center" color="textSecondary">
-              Lets complete that bucketlist!
-            </Typography>
-          </Box>
-          <Box mb={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              startIcon={<GTranslate />}
-              fullWidth
-            >
-              Continue with Google
-            </Button>
-          </Box>
-          <Box mb={1}>
-            <DividerWithText>
-              <Typography>Or</Typography>
-            </DividerWithText>
-          </Box>
+    <>
+      <Grid
+        className={classes.loginStyles}
+        container
+        justify="center"
+        alignContent="center"
+      >
+        <Grid item xs={10} md={6} lg={5}>
+          <Paper className={classes.paperStyles}>
+            <Box mb={2} fontWeight="fontWeightBold">
+              <Typography variant="h5" component="h1" align="center">
+                Welcome Back!
+              </Typography>
+              <Typography component="h2" align="center" color="textSecondary">
+                Lets complete that bucketlist!
+              </Typography>
+            </Box>
+            <Box mb={2}>
+              <Button
+                onClick={handleGoogleOauth}
+                variant="contained"
+                color="primary"
+                size="large"
+                startIcon={<GTranslate />}
+                fullWidth
+              >
+                Continue with Google
+              </Button>
+            </Box>
+            <Box mb={1}>
+              <DividerWithText>
+                <Typography>Or</Typography>
+              </DividerWithText>
+            </Box>
 
-          <FormikForm />
+            <FormikForm />
 
-          <Link href="#" onClick={preventDefault}>
-            <Typography align="center">I forgot my password</Typography>
-          </Link>
-        </Paper>
+            <Link href="#" onClick={preventDefault}>
+              <Typography align="center">I forgot my password</Typography>
+            </Link>
+          </Paper>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 
