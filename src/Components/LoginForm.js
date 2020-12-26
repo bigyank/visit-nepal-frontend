@@ -22,8 +22,9 @@ const LoginForm = () => {
   const history = useHistory();
   const [, userDispatch] = useAuth();
   const [mutateLoginUser] = useMutation(loginUser, {
-    onSuccess: (userData) => {
-      userDispatch({ type: "login", payload: userData });
+    onSuccess: () => {
+      userDispatch({ type: "login", payload: { user: true } });
+      localStorage.setItem("user", true);
       history.push("/");
     },
     onError: (error) => {

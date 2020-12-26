@@ -1,6 +1,7 @@
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { AuthRoute } from "./Components/AuthRoute";
+import AuthRoute from "./Components/AuthRoute";
+import GuestRoute from "./Components/GuestRoute";
 import Header from "./Components/Header";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
@@ -21,8 +22,8 @@ function App() {
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignupPage} />
-        <Route path="/explore" component={ExplorePage} />
-        <Route path="/contribute" component={ContributePage} />
+        <AuthRoute path="/explore" component={ExplorePage} />
+        <AuthRoute path="/contribute" component={ContributePage} />
         <Route exact path="/password/request" component={ForgotPassPage} />
         <Route path="/password/recover/:id" component={ResetPassPage} />
         <AuthRoute exact path="/" component={HomePage} />

@@ -20,7 +20,8 @@ function countReducer(state, action) {
 }
 
 function UserProvider({ children }) {
-  const [state, dispatch] = useReducer(countReducer, { user: null });
+  const userInLocal = localStorage.getItem("user");
+  const [state, dispatch] = useReducer(countReducer, { user: userInLocal });
 
   return (
     <UserStateContext.Provider value={state}>
