@@ -8,6 +8,7 @@ const GuestRoute = ({ component: Component, ...rest }) => {
   const [, userDispatch] = useAuth();
   const { error, isLoading, data } = useQuery("fetchUsers", getUser, {
     retry: false,
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {

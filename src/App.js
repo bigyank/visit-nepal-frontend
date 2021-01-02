@@ -24,8 +24,8 @@ function App() {
         <GuestRoute path="/signup" component={SignupPage} />
         <AuthRoute path="/explore" component={ExplorePage} />
         <AuthRoute path="/contribute" component={ContributePage} />
-        <Route exact path="/password/request" component={ForgotPassPage} />
-        <Route path="/password/recover/:id" component={ResetPassPage} />
+        <GuestRoute exact path="/password/request" component={ForgotPassPage} />
+        <GuestRoute path="/password/recover/:id" component={ResetPassPage} />
         <AuthRoute exact path="/" component={HomePage} />
         <Route path="*" component={NotFoundPage} />
       </Switch>

@@ -31,3 +31,12 @@ export const confirmPassReset = async ({ id, credentials }) => {
   );
   return response.data;
 };
+
+export const logoutUser = async () => {
+  const response = await axios.post(
+    BASE_URL.concat("/logout"),
+    {},
+    { withCredentials: true }
+  );
+  return response.data;
+};

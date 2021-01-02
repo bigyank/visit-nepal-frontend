@@ -20,7 +20,9 @@ const Map = () => {
     return null;
   }
 
-  const { isLoading, data } = useQuery("places", getAllPlaces);
+  const { isLoading, data } = useQuery("places", getAllPlaces, {
+    retry: false,
+  });
 
   if (isLoading) return <CircularProgress />;
 
