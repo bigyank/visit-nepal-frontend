@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useMutation } from "react-query";
 import { app } from "../firebaase";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
+import { toast } from "react-toastify";
 import {
   Button,
   LinearProgress,
@@ -16,6 +18,8 @@ import { TextField, Select } from "formik-material-ui";
 import ContributeMap from "./ContributeMap";
 import PlacesSearch from "./PlacesSearch";
 import UploadButton from "./UploadButton";
+
+import { addPlace } from "../services/place";
 
 const validator = yup.object({
   name: yup.string().required(),
@@ -43,6 +47,20 @@ const ContributeForm = () => {
   const [location, setLocation] = useState([27.7172, 85.324]);
   const classes = useStyles();
 
+  const [mutatePlaces] = useMutation(addPlace, {
+    onSuccess: () => {
+      toast.success("done");
+    },
+    onError: (error) => {
+      const errMessage =
+        error.response && error.response.data.error
+          ? error.response.data.error.message
+          : error.message;
+
+      toast.error(errMessage);
+    },
+  });
+
   return (
     <Formik
       initialValues={{
@@ -58,10 +76,14 @@ const ContributeForm = () => {
           const uploadedImg = await uploadImage(values.img);
           values.img = uploadedImg;
         }
-        setTimeout(() => {
-          setSubmitting(false);
-          alert(JSON.stringify(values, null, 2));
-        }, 500);
+        await mutatePlaces({
+          name: values.name,
+          description: values.description,
+          image: values.img,
+          lat: values.location[0],
+          lon: values.location[1],
+        });
+        setSubmitting(false);
       }}
     >
       {({ submitForm, isSubmitting, setValues, values }) => (

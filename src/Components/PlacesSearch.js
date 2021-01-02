@@ -9,7 +9,7 @@ import { Typography } from "@material-ui/core";
 const URL =
   "http://api.geonames.org/searchJSON?username=ksuhiyp&country=np&maxRows=1000&style=SHORT";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   typo: {
     marginBottom: "10px",
   },

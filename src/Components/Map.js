@@ -1,3 +1,5 @@
+import { useQuery } from "react-query";
+import { CircularProgress } from "@material-ui/core";
 import {
   MapContainer,
   TileLayer,
@@ -5,7 +7,7 @@ import {
   Popup,
   useMapEvent,
 } from "react-leaflet";
-import data from "../data.json";
+import { getAllPlaces } from "../services/place";
 
 const Map = () => {
   function SetViewOnClick() {
@@ -17,6 +19,10 @@ const Map = () => {
 
     return null;
   }
+
+  const { isLoading, data } = useQuery("places", getAllPlaces);
+
+  if (isLoading) return <CircularProgress />;
 
   return (
     <div>

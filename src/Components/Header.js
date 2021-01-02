@@ -19,8 +19,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = () => {
-  const [{ user }] = useAuth();
-
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -29,31 +27,26 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             Visit Nepal
           </Typography>
-          {user && (
-            <Button component={Link} to="/" color="inherit">
-              Home
-            </Button>
-          )}
-          {user && (
-            <Button component={Link} to="/explore" color="inherit">
-              Explore
-            </Button>
-          )}
-          {user && (
-            <Button component={Link} to="/contribute" color="inherit">
-              Contribute
-            </Button>
-          )}
-          {!user && (
-            <Button component={Link} to="/login" color="inherit">
-              Login
-            </Button>
-          )}
-          {!user && (
-            <Button component={Link} to="/signup" color="inherit">
-              Signup
-            </Button>
-          )}
+
+          <Button component={Link} to="/" color="inherit">
+            Home
+          </Button>
+
+          <Button component={Link} to="/explore" color="inherit">
+            Explore
+          </Button>
+
+          <Button component={Link} to="/contribute" color="inherit">
+            Contribute
+          </Button>
+
+          <Button component={Link} to="/login" color="inherit">
+            Login
+          </Button>
+
+          <Button component={Link} to="/signup" color="inherit">
+            Signup
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
