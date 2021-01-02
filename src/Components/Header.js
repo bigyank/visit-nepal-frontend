@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = () => {
+  const [{ user }] = useAuth();
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -28,25 +30,30 @@ const Header = () => {
             Visit Nepal
           </Typography>
 
-          <Button component={Link} to="/" color="inherit">
-            Home
-          </Button>
-
-          <Button component={Link} to="/explore" color="inherit">
-            Explore
-          </Button>
-
-          <Button component={Link} to="/contribute" color="inherit">
-            Contribute
-          </Button>
-
-          <Button component={Link} to="/login" color="inherit">
-            Login
-          </Button>
-
-          <Button component={Link} to="/signup" color="inherit">
-            Signup
-          </Button>
+          {user ? (
+            user.user ? (
+              <>
+                <Button component={Link} to="/" color="inherit">
+                  Home
+                </Button>
+                <Button component={Link} to="/explore" color="inherit">
+                  Explore
+                </Button>
+                <Button component={Link} to="/contribute" color="inherit">
+                  Contribute
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button component={Link} to="/login" color="inherit">
+                  Login
+                </Button>
+                <Button component={Link} to="/signup" color="inherit">
+                  Signup
+                </Button>
+              </>
+            )
+          ) : null}
         </Toolbar>
       </AppBar>
     </div>

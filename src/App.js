@@ -20,8 +20,8 @@ function App() {
       <Header />
       <ToastContainer position="bottom-right" />
       <Switch>
-        <Route path="/login" component={LoginPage} />
-        <Route path="/signup" component={SignupPage} />
+        <GuestRoute path="/login" component={LoginPage} />
+        <GuestRoute path="/signup" component={SignupPage} />
         <AuthRoute path="/explore" component={ExplorePage} />
         <AuthRoute path="/contribute" component={ContributePage} />
         <Route exact path="/password/request" component={ForgotPassPage} />

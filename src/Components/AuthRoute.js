@@ -1,14 +1,31 @@
+import { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useQuery } from "react-query";
-import axios from "axios";
+import { useAuth } from "../user-contex";
+import { getUser } from "../services/user";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
+  const [userState, userDispatch] = useAuth();
+
   // turned off by default, manual refetch is needed
-  const { error, isLoading, data } = useQuery(
-    "fetchUsers",
-    async () => (await axios("/api/user", { withCredentials: true })).data,
-    { retry: false }
-  );
+  const { error, isLoading, data, refetch } = useQuery("fetchUsers", getUser, {
+    retry: false,
+    enabled: false,
+  });
+
+  // only fetch user if user is null in user contex
+  useEffect(() => {
+    if (!userState.user) {
+      refetch();
+    }
+  }, [userState, refetch]);
+
+  // after sucessful fetch update the user contex
+  useEffect(() => {
+    if (data) {
+      userDispatch({ type: "login", payload: { user: true } });
+    }
+  }, [data, userDispatch]);
 
   return (
     <Route
@@ -16,7 +33,7 @@ const AuthRoute = ({ component: Component, ...rest }) => {
       render={() => {
         if (isLoading) return null;
         if (error) return <Redirect to="/login" />;
-        if (data) return <Route {...rest} component={Component} />;
+        return <Route {...rest} component={Component} />;
       }}
     />
   );
