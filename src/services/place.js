@@ -15,3 +15,10 @@ export const getAllPlaces = async () => {
   });
   return response.data;
 };
+
+export const getPlaceDetail = async (_key, id) => {
+  const response = await axios.get(BASE_URL.concat(`/${id}`), {
+    withCredentials: true,
+  });
+  return response.data;
+};
