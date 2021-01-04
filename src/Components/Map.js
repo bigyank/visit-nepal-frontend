@@ -1,5 +1,6 @@
+import { Link as RouterLink } from "react-router-dom";
 import { useQuery } from "react-query";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Link } from "@material-ui/core";
 import {
   MapContainer,
   TileLayer,
@@ -26,6 +27,9 @@ const Map = () => {
 
   if (isLoading) return <CircularProgress />;
 
+  // seems like data becomes undefined just for a second after login
+  if (!data) return <CircularProgress />;
+
   return (
     <div>
       <MapContainer
@@ -49,6 +53,11 @@ const Map = () => {
                   alt={info.name}
                 />
                 <p>{info.description}</p>
+                <p>
+                  <Link component={RouterLink} to={`/place/${info.id}`}>
+                    View
+                  </Link>
+                </p>
               </div>
             </Popup>
           </Marker>
