@@ -49,7 +49,7 @@ const ContributeForm = () => {
 
   const [mutatePlaces] = useMutation(addPlace, {
     onSuccess: () => {
-      toast.success("done");
+      toast.success("location added");
     },
     onError: (error) => {
       const errMessage =
@@ -80,8 +80,8 @@ const ContributeForm = () => {
           name: values.name,
           description: values.description,
           image: values.img,
-          lat: values.location[0],
-          lon: values.location[1],
+          location: values.location,
+          type: values.type,
         });
         setSubmitting(false);
       }}

@@ -38,7 +38,7 @@ const Map = () => {
           url={`https://api.mapbox.com/styles/v1/${process.env.REACT_APP_MAPBOX_USERNAME}/${process.env.REACT_APP_MAPBOX_STYLE_ID}/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`}
         />
         {data.map((info, index) => (
-          <Marker key={index} position={[info.lat, info.lon]}>
+          <Marker key={index} position={info.location}>
             <Popup>
               <div style={{ width: "250px", height: "auto" }}>
                 <h2>{info.name}</h2>

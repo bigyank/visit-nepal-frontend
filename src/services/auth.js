@@ -8,10 +8,11 @@ export const loginUser = async (credentials) => {
 };
 
 export const signupUser = async (credentials) => {
-  const { email, password } = credentials;
+  const { email, password, firstname, lastname } = credentials;
   const response = await axios.post(BASE_URL.concat("/signup"), {
     email,
     password,
+    displayName: `${firstname} ${lastname}`,
   });
   return response.data;
 };
