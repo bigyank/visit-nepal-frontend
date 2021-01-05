@@ -22,3 +22,11 @@ export const getPlaceDetail = async (_key, id) => {
   });
   return response.data;
 };
+
+export const makeReview = async (data) => {
+  const { id, review } = data;
+  const response = await axios.post(BASE_URL.concat(`/${id}/reviews`), review, {
+    withCredentials: true,
+  });
+  return response.data;
+};

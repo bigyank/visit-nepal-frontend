@@ -15,8 +15,6 @@ import NotFoundPage from "./Pages/NotFoundPage";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import Editor from "./Components/Editor";
-
 function App() {
   return (
     <Router>
@@ -30,7 +28,6 @@ function App() {
         <GuestRoute exact path="/password/request" component={ForgotPassPage} />
         <GuestRoute path="/password/recover/:id" component={ResetPassPage} />
         <AuthRoute path="/place/:id" component={PlaceDetailPage} />
-        <AuthRoute path="/editor" component={Editor} />
         <AuthRoute exact path="/" component={HomePage} />
         <Route path="*" component={NotFoundPage} />
       </Switch>
