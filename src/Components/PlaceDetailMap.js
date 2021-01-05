@@ -1,11 +1,5 @@
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvent,
-} from "react-leaflet";
-import { Box, Paper, makeStyles } from "@material-ui/core";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { Box, Paper } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -19,7 +13,7 @@ const PlaceDetailMap = ({ location }) => {
         <MapContainer
           style={{ height: "40vh", width: "100%" }}
           center={location}
-          zoom={13}
+          zoom={16}
           scrollWheelZoom={false}
         >
           <TileLayer
