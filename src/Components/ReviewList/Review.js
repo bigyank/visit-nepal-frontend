@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import { Box, Grid, Typography, Button, Divider } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import ReviewList from "./ReviewList";
 
-const Review = ({ reviews }) => {
+const Review = ({ reviews, id }) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -25,9 +26,11 @@ const Review = ({ reviews }) => {
             </Grid>
             <Grid item>
               <Button
+                component={Link}
                 variant="contained"
                 color="primary"
                 size={matches ? "large" : "medium"}
+                to={`/place/${id}/review`}
               >
                 Write a Review
               </Button>

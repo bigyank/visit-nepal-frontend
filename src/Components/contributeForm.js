@@ -119,7 +119,7 @@ const ContributeForm = () => {
               component={Select}
               name="type"
               inputProps={{
-                id: "age-simple",
+                id: "place-type",
               }}
               fullWidth
             >

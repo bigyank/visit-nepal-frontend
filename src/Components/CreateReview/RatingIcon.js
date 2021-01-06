@@ -1,6 +1,7 @@
 import React from "react";
-import StarIcon from "@material-ui/icons/Star";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
+import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
+import StarRoundedIcon from "@material-ui/icons/StarRounded";
+import { green } from "@material-ui/core/colors";
 
 function RatingIcon(props) {
   const {
@@ -20,11 +21,11 @@ function RatingIcon(props) {
       onClick={() => onSaveRating(index)}
     >
       {hoverRating >= index ? (
-        <StarIcon />
+        <StarRoundedIcon fontSize="large" style={{ color: green[500] }} />
       ) : !hoverRating && rating >= index ? (
-        <StarIcon />
+        <StarRoundedIcon fontSize="large" style={{ color: green[500] }} />
       ) : (
-        <StarBorderIcon />
+        <StarBorderRoundedIcon fontSize="large" style={{ color: green[500] }} />
       )}
     </div>
   );

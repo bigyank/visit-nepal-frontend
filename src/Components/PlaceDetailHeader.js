@@ -66,7 +66,11 @@ const PlaceDetailHeader = ({ data }) => {
               </Typography>
 
               <Typography className={classes.typographyStyles}>
-                <Rating rating={data.rating} numReviews={data.numReviews} />
+                <Rating
+                  rating={data.rating}
+                  numReviews={data.numReviews}
+                  fontSize="large"
+                />
               </Typography>
 
               <Typography

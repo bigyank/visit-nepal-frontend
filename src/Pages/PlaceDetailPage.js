@@ -19,7 +19,7 @@ const PlaceDetail = ({ match }) => {
     <>
       <PlaceDetailHeader data={data} />
       <PlaceDetailMap location={data.location} />
-      <Review reviews={data.reviews} />
+      <Review reviews={data.reviews} id={id} />
     </>
   );
 };

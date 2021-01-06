@@ -11,6 +11,7 @@ import ContributePage from "./Pages/ContributePage";
 import ForgotPassPage from "./Pages/ForgotPassPage";
 import ResetPassPage from "./Pages/ResetPassPage";
 import PlaceDetailPage from "./Pages/PlaceDetailPage";
+import PlaceReviewPage from "./Pages/PlaceReviewPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -27,6 +28,7 @@ function App() {
         <AuthRoute path="/contribute" component={ContributePage} />
         <GuestRoute exact path="/password/request" component={ForgotPassPage} />
         <GuestRoute path="/password/recover/:id" component={ResetPassPage} />
+        <AuthRoute path="/place/:id/review" component={PlaceReviewPage} />
         <AuthRoute path="/place/:id" component={PlaceDetailPage} />
         <AuthRoute exact path="/" component={HomePage} />
         <Route path="*" component={NotFoundPage} />

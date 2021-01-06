@@ -1,8 +1,10 @@
 import { Grid } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
-import { Star, StarHalf, StarBorder } from "@material-ui/icons/";
+import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
+import StarRoundedIcon from "@material-ui/icons/StarRounded";
+import StarHalfRoundedIcon from "@material-ui/icons/StarHalfRounded";
 
-const Rating = ({ rating, numReviews }) => {
+const Rating = ({ rating, numReviews, fontSize = "small" }) => {
   const isFloat = function (n) {
     return parseInt(n) !== n;
   };
@@ -16,15 +18,28 @@ const Rating = ({ rating, numReviews }) => {
       <Grid item>
         {/* number of full stars */}
         {[...Array(Math.floor(rating))].map((_, index) => (
-          <Star key={index} style={{ color: green[500] }} />
+          <StarRoundedIcon
+            key={index}
+            fontSize={fontSize}
+            style={{ color: green[500] }}
+          />
         ))}
 
         {/* add halfstar if needed */}
-        {isFloat(rating) && <StarHalf style={{ color: green[500] }} />}
+        {isFloat(rating) && (
+          <StarHalfRoundedIcon
+            style={{ color: green[500] }}
+            fontSize={fontSize}
+          />
+        )}
 
         {/* remaining empty star out of 5 */}
         {[...Array(5 - Math.ceil(rating))].map((_, index) => (
-          <StarBorder key={index} />
+          <StarBorderRoundedIcon
+            key={index}
+            style={{ color: green[500] }}
+            fontSize={fontSize}
+          />
         ))}
       </Grid>
       {numReviews && (
