@@ -40,8 +40,22 @@ const Review = ({ reviews, id }) => {
         <Box mb={4}>
           <Divider />
         </Box>
-
-        <ReviewList reviews={reviews} />
+        {reviews.length !== 0 ? (
+          <ReviewList reviews={reviews} />
+        ) : (
+          <Grid container justify="center">
+            <Grid item xs={12} md={8}>
+              <img
+                src="./images/searching.png"
+                alt="searching"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
+              />
+            </Grid>
+          </Grid>
+        )}
       </Box>
     </Grid>
   );
