@@ -30,6 +30,7 @@ const StarRating = ({ rating, setRating }) => {
       {[1, 2, 3, 4, 5].map((index) => {
         return (
           <RatingIcon
+            key={index}
             index={index}
             rating={rating}
             hoverRating={hoverRating}

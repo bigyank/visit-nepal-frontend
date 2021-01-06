@@ -1,0 +1,47 @@
+import { Box, Grid, Typography, Button, Divider } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+import ReviewList from "./ReviewList";
+
+const Review = ({ reviews }) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+
+  return (
+    <Grid container justify="center">
+      <Box
+        m={matches ? 4 : 0}
+        p={4}
+        width={matches ? "60%" : "100%"}
+        bgcolor="white.500"
+        border={1}
+        borderColor="grey.300"
+        borderRadius="borderRadius"
+      >
+        <Box mb={4}>
+          <Grid container justify="space-between">
+            <Grid item>
+              <Typography variant={matches ? "h4" : "h5"}>Reviews</Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                size={matches ? "large" : "medium"}
+              >
+                Write a Review
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box mb={4}>
+          <Divider />
+        </Box>
+
+        <ReviewList reviews={reviews} />
+      </Box>
+    </Grid>
+  );
+};
+
+export default Review;

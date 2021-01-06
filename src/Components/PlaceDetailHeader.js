@@ -65,19 +65,16 @@ const PlaceDetailHeader = ({ data }) => {
                 {data.type}
               </Typography>
 
-              <Divider />
               <Typography className={classes.typographyStyles}>
                 <Rating rating={data.rating} numReviews={data.numReviews} />
               </Typography>
 
-              <Divider />
               <Typography
                 variant="subtitle1"
                 className={classes.typographyStyles}
               >
                 {data.description}
               </Typography>
-              <Divider />
             </Grid>
 
             <Grid item>

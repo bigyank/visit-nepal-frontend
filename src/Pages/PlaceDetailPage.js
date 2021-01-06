@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { CircularProgress } from "@material-ui/core";
 import PlaceDetailHeader from "../Components/PlaceDetailHeader";
 import PlaceDetailMap from "../Components/PlaceDetailMap";
-import Review from "../Components/ReviewComponent/Review";
+import Review from "../Components/ReviewList/Review";
 import { getPlaceDetail } from "../services/place";
 
 const PlaceDetail = ({ match }) => {
@@ -19,7 +19,7 @@ const PlaceDetail = ({ match }) => {
     <>
       <PlaceDetailHeader data={data} />
       <PlaceDetailMap location={data.location} />
-      <Review id={id} />
+      <Review reviews={data.reviews} />
     </>
   );
 };
