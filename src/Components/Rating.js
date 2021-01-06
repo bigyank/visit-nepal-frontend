@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
@@ -42,9 +42,14 @@ const Rating = ({ rating, numReviews, fontSize = "small" }) => {
           />
         ))}
       </Grid>
-      {numReviews && (
+      {numReviews !== 0 && (
         <Grid item>
-          {numReviews} {numReviews <= 1 ? "review" : "reviews"}
+          {numReviews && (
+            <Typography>
+              {numReviews}
+              {numReviews < 2 ? " review" : " reviews"}
+            </Typography>
+          )}
         </Grid>
       )}
     </Grid>

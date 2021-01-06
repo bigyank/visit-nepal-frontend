@@ -3,16 +3,21 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { red } from "@material-ui/core/colors";
 
 import Rating from "../Rating";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: "100%",
+  },
+  media: {
+    paddingTop: "56.25%", // 16:9
   },
   icon: {
     color: red[400],
@@ -22,7 +27,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function ReviewCard({ createdAt, comment, rating, user }) {
+export default function ReviewCard({
+  createdAt,
+  comment,
+  rating,
+  img,
+  user,
+  title,
+}) {
   const classes = useStyles();
 
   return (
@@ -37,8 +49,22 @@ export default function ReviewCard({ createdAt, comment, rating, user }) {
         title={user.displayName}
         subheader={createdAt}
       />
+      {img && (
+        <CardMedia
+          className={classes.media}
+          image={img}
+          alt="user img"
+          height="140"
+        />
+      )}
       <CardContent>
         <Rating rating={rating} />
+        {title && (
+          <Typography gutterBottom variant="h5" component="h2">
+            {title}
+          </Typography>
+        )}
+
         {ReactHtmlParser(comment)}
       </CardContent>
     </Card>

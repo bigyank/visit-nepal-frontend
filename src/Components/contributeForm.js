@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
+import { useHistory } from "react-router-dom";
 import { app } from "../firebaase";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
@@ -44,12 +45,14 @@ const uploadImage = async (img) => {
 };
 
 const ContributeForm = () => {
+  const history = useHistory();
   const [location, setLocation] = useState([27.7172, 85.324]);
   const classes = useStyles();
 
   const [mutatePlaces] = useMutation(addPlace, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast.success("location added");
+      history.push(`/place/${data.id}`);
     },
     onError: (error) => {
       const errMessage =
@@ -68,11 +71,11 @@ const ContributeForm = () => {
         description: "",
         type: "landmark",
         location: [27.7172, 85.324],
-        img: "/images/sample.jpg",
+        img: null,
       }}
       validationSchema={validator}
       onSubmit={async (values, { setSubmitting }) => {
-        if (typeof values.img !== "string") {
+        if (values.img) {
           const uploadedImg = await uploadImage(values.img);
           values.img = uploadedImg;
         }

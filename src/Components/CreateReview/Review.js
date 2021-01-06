@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useMutation, queryCache } from "react-query";
+import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   Box,
@@ -18,6 +19,8 @@ import { PhotoCamera } from "@material-ui/icons";
 import { app } from "../../firebaase";
 
 const Review = ({ id }) => {
+  const history = useHistory();
+
   const [rating, setRating] = useState(0);
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
@@ -25,11 +28,12 @@ const Review = ({ id }) => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   const [mutateMakeReview] = useMutation(makeReview, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryCache.refetchQueries("placeDetail");
       toast.info("Review added sucessfully");
       setValue("");
       setRating(0);
+      history.push(`/place/${data.id}`);
     },
 
     onError: (error) => {

@@ -20,6 +20,8 @@ const ReviewList = ({ reviews }) => {
             rating={review.rating}
             createdAt={review.createdAt}
             user={review.user}
+            img={review.img}
+            title={review.title}
           />
         </Box>
       ))}
