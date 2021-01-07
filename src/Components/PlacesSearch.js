@@ -1,13 +1,8 @@
-import { useQuery } from "react-query";
-import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { Typography } from "@material-ui/core";
-
-const URL =
-  "http://api.geonames.org/searchJSON?username=ksuhiyp&country=np&maxRows=1000&style=SHORT";
+import data from "../search.json";
 
 const useStyles = makeStyles(() => ({
   typo: {
@@ -17,12 +12,6 @@ const useStyles = makeStyles(() => ({
 
 const PlacesSearch = ({ setLocation }) => {
   const classes = useStyles();
-  const { data, isLoading } = useQuery("cities", async () => {
-    const response = await axios.get(URL);
-    return response.data;
-  });
-
-  if (isLoading) return <CircularProgress />;
 
   return (
     <>
