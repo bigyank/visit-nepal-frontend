@@ -14,6 +14,8 @@ import PlaceDetailPage from "./Pages/PlaceDetailPage";
 import PlaceReviewPage from "./Pages/PlaceReviewPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 
+import Editor from "./Components/Home/EditorChoice";
+
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
         <GuestRoute path="/password/recover/:id" component={ResetPassPage} />
         <AuthRoute path="/place/:id/review" component={PlaceReviewPage} />
         <AuthRoute path="/place/:id" component={PlaceDetailPage} />
+        <AuthRoute path="/cards" component={Editor} />
         <AuthRoute exact path="/" component={HomePage} />
         <Route path="*" component={NotFoundPage} />
       </Switch>

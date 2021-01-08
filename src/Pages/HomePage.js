@@ -4,6 +4,8 @@ import { useTheme } from "@material-ui/core/styles";
 import HeaderSearch from "../Components/Home/HeaderSearch";
 import HomeContribute from "../Components/Home/HomeContribute";
 import HomeGuide from "../Components/Home/HomeGuide";
+import EditorChoice from "../Components/Home/EditorChoice";
+import BestDestination from "../Components/Home/BestDestination";
 
 const Home = () => {
   const theme = useTheme();
@@ -13,8 +15,10 @@ const Home = () => {
   return (
     <Box mx={smMatch ? 4 : 1.5} my={8}>
       <HeaderSearch smMatch={smMatch} mdMatch={mdMatch} />
+      <EditorChoice />
       <HomeContribute />
       <HomeGuide />
+      <BestDestination />
     </Box>
   );
 };

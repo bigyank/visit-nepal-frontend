@@ -14,7 +14,7 @@ import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   root: {
-    maxWidth: "100%",
+    maxWidth: "60%",
   },
   media: {
     paddingTop: "56.25%", // 16:9

@@ -17,7 +17,6 @@ const Review = ({ reviews, id }) => {
         bgcolor="white.500"
         border={1}
         borderColor="grey.300"
-        borderRadius="borderRadius"
       >
         <Box mb={4}>
           <Grid container justify="space-between">

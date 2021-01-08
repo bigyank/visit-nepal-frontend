@@ -30,3 +30,17 @@ export const makeReview = async (data) => {
   });
   return response.data;
 };
+
+export const getEditorChoice = async () => {
+  const response = await axios.get(BASE_URL.concat("/editor"), {
+    withCredentials: true,
+  });
+  return response.data;
+};
+
+export const getBestDestinations = async () => {
+  const response = await axios.get(BASE_URL.concat("/top"), {
+    withCredentials: true,
+  });
+  return response.data;
+};
