@@ -44,3 +44,11 @@ export const getBestDestinations = async () => {
   });
   return response.data;
 };
+
+export const getPlaceByQuery = async (_id, query) => {
+  console.log(query);
+  const response = await axios.get(BASE_URL.concat(`?keyword=${query}`), {
+    withCredentials: true,
+  });
+  return response.data;
+};

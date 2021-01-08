@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { useHistory } from "react-router-dom";
 import {
   Paper,
   Grid,
@@ -6,10 +9,31 @@ import {
   Typography,
   InputAdornment,
   Hidden,
+  CircularProgress,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import { getPlaceByQuery } from "../../services/place";
 
 const HeaderSearch = ({ smMatch, mdMatch }) => {
+  const history = useHistory();
+  const [search, setSearch] = useState("");
+
+  const { isLoading, refetch } = useQuery(
+    ["getPlaceByQuery", search],
+    getPlaceByQuery,
+    {
+      enabled: false,
+      onSuccess: (data) => {
+        if (data.length === 0) return history.push("/404");
+        history.push(`/place/${data[0].id}`);
+      },
+    }
+  );
+
+  const handleQuery = () => {
+    refetch();
+  };
+
   const styles = {
     searchContainer: {
       height: mdMatch ? "60vh" : "40vh",
@@ -41,13 +65,20 @@ const HeaderSearch = ({ smMatch, mdMatch }) => {
             </Grid>
             <Grid item>
               <TextField
+                value={search}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    handleQuery();
+                  }
+                }}
+                onChange={({ target }) => setSearch(target.value)}
                 id="header-search"
                 variant="outlined"
                 fullWidth
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <SearchIcon />
+                      {isLoading ? <CircularProgress /> : <SearchIcon />}
                     </InputAdornment>
                   ),
                 }}
