@@ -2,18 +2,16 @@ import {
   Paper,
   Grid,
   Box,
-  TextField,
   Typography,
-  InputAdornment,
   Hidden,
+  Button,
 } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
 
-const HeaderSearch = ({ smMatch, mdMatch }) => {
+const HomeGuide = () => {
   const styles = {
     searchContainer: {
-      height: mdMatch ? "60vh" : "40vh",
-      backgroundImage: `url(${"./images/explore.png"})`,
+      height: "40vh",
+      backgroundImage: `url(${"./images/guide.png"})`,
       backgroundRepeat: "no-repeat",
       backgroundSize: "contain",
       backgroundPosition: "center",
@@ -21,7 +19,7 @@ const HeaderSearch = ({ smMatch, mdMatch }) => {
   };
 
   return (
-    <Box mb={mdMatch ? 12 : 6}>
+    <Box mb={6}>
       <Paper style={{ padding: "20px" }}>
         <Grid container spacing={4}>
           <Grid
@@ -31,27 +29,22 @@ const HeaderSearch = ({ smMatch, mdMatch }) => {
             sm={6}
             direction="column"
             justify="center"
+            alignItems="center"
           >
             <Grid item>
               <Box mb={2}>
-                <Typography align="center" variant={smMatch ? "h5" : "body1"}>
-                  Find your next Destination
+                <Typography align="center" variant="h5">
+                  Want to be a Guide?
+                </Typography>
+                <Typography align="center" variant={"body1"}>
+                  Be a guide and share what you have in you
                 </Typography>
               </Box>
             </Grid>
             <Grid item>
-              <TextField
-                id="header-search"
-                variant="outlined"
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
+              <Button variant="contained" color="primary">
+                Be a Guide
+              </Button>
             </Grid>
           </Grid>
           <Hidden xsDown>
@@ -65,4 +58,4 @@ const HeaderSearch = ({ smMatch, mdMatch }) => {
   );
 };
 
-export default HeaderSearch;
+export default HomeGuide;
