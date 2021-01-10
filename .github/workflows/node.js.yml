@@ -3,6 +3,13 @@
 
 name: Node.js CI
 
+- name: Create .env file
+  run: |
+    touch .env
+    echo REACT_APP_MAPBOX_ACCESS_TOKEN=${{ secrets.REACT_APP_MAPBOX_ACCESS_TOKEN }} >> .env
+    echo REACT_APP_MAPBOX_STYLE_ID=${{ secrets.REACT_APP_MAPBOX_STYLE_ID }} >> .env
+    echo REACT_APP_MAPBOX_USERNAME=${{ secrets.REACT_APP_MAPBOX_USERNAME }} >> .env
+    
 on:
   push:
     branches: [master]
