@@ -1,4 +1,4 @@
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import AuthRoute from "./Components/AuthRoute";
 import GuestRoute from "./Components/GuestRoute";
