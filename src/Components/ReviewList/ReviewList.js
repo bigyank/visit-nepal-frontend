@@ -12,7 +12,7 @@ const ReviewList = ({ reviews }) => {
   const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
   return (
-    <Grid container direction="column">
+    <Grid container direction="column" spacing={2}>
       {currentReviews.map((review) => (
         <Grid item xs={12} key={review.id}>
           <Box key={review.id} mb={2}>
@@ -28,12 +28,14 @@ const ReviewList = ({ reviews }) => {
         </Grid>
       ))}
 
-      <Pagination
-        color="primary"
-        count={Math.ceil(reviews.length / postsPerPage)}
-        page={currentPage}
-        onChange={(_event, pnumber) => setCurrentPage(pnumber)}
-      />
+      <Grid item>
+        <Pagination
+          color="primary"
+          count={Math.ceil(reviews.length / postsPerPage)}
+          page={currentPage}
+          onChange={(_event, pnumber) => setCurrentPage(pnumber)}
+        />
+      </Grid>
     </Grid>
   );
 };
