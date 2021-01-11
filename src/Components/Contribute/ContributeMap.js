@@ -54,9 +54,3 @@ const ContributeMap = ({ setValues, values, location, setLocation }) => {
 };
 
 export default ContributeMap;
-
-// mapbox://styles/notauser/ckiu5pj582km519s3ey4hwl1b
-// pk.eyJ1Ijoibm90YXVzZXIiLCJhIjoiY2tpdTVydzB6MnV0dDJxbGIyczBlaHB1dCJ9.xlDmN1f-Pec6BoR6PQywTg
-// https://api.mapbox.com/styles/v1/notauser/ckiu5pj582km519s3ey4hwl1b/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoibm90YXVzZXIiLCJhIjoiY2tpdTVydzB6MnV0dDJxbGIyczBlaHB1dCJ9.xlDmN1f-Pec6BoR6PQywTg
-
-// https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
