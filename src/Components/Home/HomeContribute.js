@@ -8,10 +8,12 @@ import {
   Typography,
 } from "@material-ui/core";
 
+import map from "../../images/map.png";
+
 const styles = {
   contributeContainer: {
     height: "40vh",
-    backgroundImage: `url(${"./images/map.png"})`,
+    backgroundImage: `url(${map})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "contain",
     backgroundPosition: "center",

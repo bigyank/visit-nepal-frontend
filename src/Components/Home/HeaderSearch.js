@@ -14,6 +14,8 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import { getPlaceByQuery } from "../../services/place";
 
+import explore from "../../images/explore.png";
+
 const HeaderSearch = ({ smMatch, mdMatch }) => {
   const history = useHistory();
   const [search, setSearch] = useState("");
@@ -37,7 +39,7 @@ const HeaderSearch = ({ smMatch, mdMatch }) => {
   const styles = {
     searchContainer: {
       height: mdMatch ? "60vh" : "40vh",
-      backgroundImage: `url(${"./images/explore.png"})`,
+      backgroundImage: `url(${explore})`,
       backgroundRepeat: "no-repeat",
       backgroundSize: "contain",
       backgroundPosition: "center",

@@ -7,11 +7,13 @@ import {
   Button,
 } from "@material-ui/core";
 
+import guide from "../../images/guide.png";
+
 const HomeGuide = () => {
   const styles = {
     searchContainer: {
       height: "40vh",
-      backgroundImage: `url(${"./images/guide.png"})`,
+      backgroundImage: `url(${guide})`,
       backgroundRepeat: "no-repeat",
       backgroundSize: "contain",
       backgroundPosition: "center",

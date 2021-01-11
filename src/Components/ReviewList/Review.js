@@ -1,8 +1,27 @@
 import { Link } from "react-router-dom";
-import { Box, Grid, Typography, Button, Divider } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  Typography,
+  Button,
+  Divider,
+  Hidden,
+} from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import ReviewList from "./ReviewList";
+
+import searching from "../../images/searching.png";
+
+const styles = {
+  searchContainer: {
+    height: "40vh",
+    backgroundImage: `url(${searching})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
+    backgroundPosition: "center",
+  },
+};
 
 const Review = ({ reviews, id }) => {
   const theme = useTheme();
@@ -43,16 +62,11 @@ const Review = ({ reviews, id }) => {
           <ReviewList reviews={reviews} />
         ) : (
           <Grid container justify="center">
-            <Grid item xs={12} md={8}>
-              <img
-                src="./images/searching.png"
-                alt="searching"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                }}
-              />
-            </Grid>
+            <Hidden xsDown>
+              <Grid item xs={6}>
+                <Box style={styles.searchContainer}></Box>
+              </Grid>
+            </Hidden>
           </Grid>
         )}
       </Box>

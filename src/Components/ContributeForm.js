@@ -78,6 +78,9 @@ const ContributeForm = () => {
         if (values.img) {
           const uploadedImg = await uploadImage(values.img);
           values.img = uploadedImg;
+        } else {
+          toast.error("image is required");
+          return;
         }
         await mutatePlaces({
           name: values.name,
