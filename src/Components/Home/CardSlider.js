@@ -1,7 +1,6 @@
+import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -9,7 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { Box } from "@material-ui/core";
+import { Box, CardActionArea } from "@material-ui/core";
 
 import Rating from "../Rating";
 import { red } from "@material-ui/core/colors";
@@ -56,16 +55,18 @@ const CardSlider = ({ editorData }) => {
       {editorData.map((data) => (
         <Box key={data.id} p={2}>
           <Card className={classes.root}>
-            <CardHeader
-              title={data.name}
-              subheader={data.type}
-              action={
-                <IconButton aria-label="settings">
-                  <FavoriteIcon className={classes.icon} />
-                </IconButton>
-              }
-            />
-            <CardMedia className={classes.media} image={data.image} />
+            <CardActionArea component={Link} to={`/place/${data.id}`}>
+              <CardHeader
+                title={data.name}
+                subheader={data.type}
+                action={
+                  <IconButton aria-label="settings">
+                    <FavoriteIcon className={classes.icon} />
+                  </IconButton>
+                }
+              />
+              <CardMedia className={classes.media} image={data.image} />
+            </CardActionArea>
             <CardContent>
               <Rating rating={data.rating} numReviews={data.numReviews} />
             </CardContent>
