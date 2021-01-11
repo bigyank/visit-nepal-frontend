@@ -47,7 +47,6 @@ const responsive = {
 };
 
 const CardSlider = ({ editorData }) => {
-  console.log(editorData);
   const classes = useStyles();
 
   return (

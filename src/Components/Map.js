@@ -21,9 +21,7 @@ const Map = () => {
     return null;
   }
 
-  const { isLoading, data } = useQuery("places", getAllPlaces, {
-    retry: false,
-  });
+  const { isLoading, data } = useQuery("places", getAllPlaces);
 
   if (isLoading) return <CircularProgress />;
 

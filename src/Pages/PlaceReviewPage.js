@@ -13,16 +13,20 @@ import { useTheme } from "@material-ui/core/styles";
 import Review from "../Components/CreateReview/Review";
 import { getPlaceDetail } from "../services/place";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   reviewStyles: {
     width: "60%",
     padding: "2rem",
+    [theme.breakpoints.down("md")]: {
+      width: "90%",
+      padding: "1rem",
+    },
   },
   imageStyles: {
     width: "100%",
     height: "auto",
   },
-});
+}));
 
 function PlaceReviewPlace({ match }) {
   const { id } = match.params;
@@ -32,10 +36,7 @@ function PlaceReviewPlace({ match }) {
 
   const { isLoading, data } = useQuery(
     ["placeDetailReview", id],
-    getPlaceDetail,
-    {
-      retry: false,
-    }
+    getPlaceDetail
   );
 
   if (isLoading) return <CircularProgress />;

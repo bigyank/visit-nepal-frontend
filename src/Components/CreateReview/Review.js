@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation, queryCache } from "react-query";
+import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -29,7 +29,6 @@ const Review = ({ id }) => {
 
   const [mutateMakeReview] = useMutation(makeReview, {
     onSuccess: (data) => {
-      queryCache.refetchQueries("placeDetail");
       toast.info("Review added sucessfully");
       setValue("");
       setRating(0);

@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
   },
   loginStyles: {
     marginTop: "2rem",
+    [theme.breakpoints.down("md")]: {
+      padding: "1rem 1rem",
+    },
   },
 }));
 
@@ -25,7 +28,7 @@ const Contribute = () => {
       justify="center"
       alignContent="center"
     >
-      <Grid item xs={10} md={6}>
+      <Grid item xs={12} md={6}>
         <Paper className={classes.paperStyles}>
           <Box mb={2} fontWeight="fontWeightBold">
             <Typography variant="h5" component="h1" align="center">

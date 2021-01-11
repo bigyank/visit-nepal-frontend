@@ -8,9 +8,7 @@ import { getPlaceDetail } from "../services/place";
 const PlaceDetail = ({ match }) => {
   const { id } = match.params;
 
-  const { isLoading, data } = useQuery(["placeDetail", id], getPlaceDetail, {
-    retry: false,
-  });
+  const { isLoading, data } = useQuery(["placeDetail", id], getPlaceDetail);
 
   if (isLoading) return <CircularProgress />;
   if (!data) return <CircularProgress />;

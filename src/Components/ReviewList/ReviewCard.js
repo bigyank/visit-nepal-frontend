@@ -14,9 +14,12 @@ import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 450,
-    [theme.breakpoints.down("md")]: {
+    maxWidth: 500,
+    [theme.breakpoints.down("sm")]: {
       maxWidth: 300,
+    },
+    [theme.breakpoints.down("md")]: {
+      maxWidth: 400,
     },
   },
   media: {

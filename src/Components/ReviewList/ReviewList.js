@@ -14,7 +14,7 @@ const ReviewList = ({ reviews }) => {
   return (
     <Grid container direction="column">
       {currentReviews.map((review) => (
-        <Grid item xs={12}>
+        <Grid item xs={12} key={review.id}>
           <Box key={review.id} mb={2}>
             <ReviewCard
               comment={review.comment}
