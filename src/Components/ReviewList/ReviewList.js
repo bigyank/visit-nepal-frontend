@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import ReviewCard from "./ReviewCard";
 
@@ -12,27 +12,29 @@ const ReviewList = ({ reviews }) => {
   const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
   return (
-    <Box>
+    <Grid container direction="column">
       {currentReviews.map((review) => (
-        <Box key={review.id} mb={2}>
-          <ReviewCard
-            comment={review.comment}
-            rating={review.rating}
-            createdAt={review.createdAt}
-            user={review.user}
-            img={review.img}
-            title={review.title}
-          />
-        </Box>
+        <Grid item xs={12}>
+          <Box key={review.id} mb={2}>
+            <ReviewCard
+              comment={review.comment}
+              rating={review.rating}
+              createdAt={review.createdAt}
+              user={review.user}
+              img={review.img}
+              title={review.title}
+            />
+          </Box>
+        </Grid>
       ))}
 
       <Pagination
         color="primary"
         count={Math.ceil(reviews.length / postsPerPage)}
         page={currentPage}
-        onChange={(event, pnumber) => setCurrentPage(pnumber)}
+        onChange={(_event, pnumber) => setCurrentPage(pnumber)}
       />
-    </Box>
+    </Grid>
   );
 };
 

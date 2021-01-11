@@ -12,9 +12,12 @@ import { red } from "@material-ui/core/colors";
 import Rating from "../Rating";
 import { Typography } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: "60%",
+    maxWidth: 450,
+    [theme.breakpoints.down("md")]: {
+      maxWidth: 300,
+    },
   },
   media: {
     paddingTop: "56.25%", // 16:9
