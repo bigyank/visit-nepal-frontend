@@ -1,9 +1,8 @@
-import { Link as RouterLink } from "react-router-dom";
-import { Typography, Link } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import InfoBox from "../Components/InfoBox";
-import empty from "../images/empty.png";
+import error from "../images/error.png";
 
 const createMessage = (matches) => {
   return (
@@ -12,20 +11,17 @@ const createMessage = (matches) => {
         Sorry, We could not find the destination
       </Typography>
       <Typography variant={matches ? "body1" : "body2"} align="center">
-        Please be more specific or{" "}
-        <Link to={`/contribute`} component={RouterLink}>
-          contribute
-        </Link>
+        Please try again after a while
       </Typography>
     </>
   );
 };
 
-const NotFoundPage = () => {
+const ErrorPage = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const message = createMessage(matches);
-  return <InfoBox image={empty} message={message} />;
+  return <InfoBox image={error} message={message} />;
 };
 
-export default NotFoundPage;
+export default ErrorPage;

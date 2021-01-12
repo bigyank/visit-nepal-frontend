@@ -3,29 +3,29 @@ import { Typography, Link } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import InfoBox from "../Components/InfoBox";
-import empty from "../images/empty.png";
+import confirm from "../images/confirm.png";
 
 const createMessage = (matches) => {
   return (
     <>
       <Typography variant={matches ? "h5" : "body1"} align="center">
-        Sorry, We could not find the destination
+        The email was verified sucessfully
       </Typography>
       <Typography variant={matches ? "body1" : "body2"} align="center">
-        Please be more specific or{" "}
-        <Link to={`/contribute`} component={RouterLink}>
-          contribute
+        you can now{" "}
+        <Link to={`/login`} component={RouterLink}>
+          login
         </Link>
       </Typography>
     </>
   );
 };
 
-const NotFoundPage = () => {
+const EmailConfirmPage = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const message = createMessage(matches);
-  return <InfoBox image={empty} message={message} />;
+  return <InfoBox image={confirm} message={message} />;
 };
 
-export default NotFoundPage;
+export default EmailConfirmPage;

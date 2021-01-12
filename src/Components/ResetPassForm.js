@@ -25,8 +25,7 @@ const ResetPassForm = ({ id }) => {
 
   const [mutatePassReset] = useMutation(confirmPassReset, {
     onSuccess: () => {
-      toast.info("password reset sucessful");
-      history.push("/login");
+      history.push("/password/sucess");
     },
     onError: (error) => {
       const errMessage =

@@ -3,29 +3,30 @@ import { Typography, Link } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import InfoBox from "../Components/InfoBox";
-import empty from "../images/empty.png";
+import reset from "../images/reset.png";
 
 const createMessage = (matches) => {
   return (
     <>
       <Typography variant={matches ? "h5" : "body1"} align="center">
-        Sorry, We could not find the destination
+        The password was reset sucessfully
       </Typography>
       <Typography variant={matches ? "body1" : "body2"} align="center">
-        Please be more specific or{" "}
-        <Link to={`/contribute`} component={RouterLink}>
-          contribute
-        </Link>
+        you can now{" "}
+        <Link to={`/login`} component={RouterLink}>
+          login
+        </Link>{" "}
+        with the new password
       </Typography>
     </>
   );
 };
 
-const NotFoundPage = () => {
+const PasswordRecoverPage = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const message = createMessage(matches);
-  return <InfoBox image={empty} message={message} />;
+  return <InfoBox image={reset} message={message} />;
 };
 
-export default NotFoundPage;
+export default PasswordRecoverPage;

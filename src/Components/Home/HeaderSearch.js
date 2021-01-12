@@ -26,7 +26,7 @@ const HeaderSearch = ({ smMatch, mdMatch }) => {
     {
       enabled: false,
       onSuccess: (data) => {
-        if (data.length === 0) return history.push("/404");
+        if (data.length === 0) return history.push("/notfound");
         history.push(`/place/${data[0].id}`);
       },
     }
