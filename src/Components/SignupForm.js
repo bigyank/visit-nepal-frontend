@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useMutation } from "react-query";
 import { Formik, Form, Field } from "formik";
 import { toast } from "react-toastify";
@@ -32,6 +33,7 @@ const formInitValues = {
 
 const SignupForm = () => {
   const formRef = useRef();
+  const reRef = useRef();
   const classes = useStyles();
 
   const [mutateSignupUser] = useMutation(signupUser, {
@@ -55,7 +57,9 @@ const SignupForm = () => {
       initialValues={formInitValues}
       validationSchema={validator}
       onSubmit={async (values, { setSubmitting }) => {
-        await mutateSignupUser(values);
+        const token = await reRef.current.executeAsync();
+        reRef.current.reset();
+        await mutateSignupUser({ ...values, token });
         setSubmitting(false);
       }}
     >
@@ -118,6 +122,11 @@ const SignupForm = () => {
               Sign Up
             </Button>
           </Box>
+          <ReCAPTCHA
+            sitekey={process.env.REACT_APP_RECAPTCHA}
+            size="invisible"
+            ref={reRef}
+          />
         </Form>
       )}
     </Formik>

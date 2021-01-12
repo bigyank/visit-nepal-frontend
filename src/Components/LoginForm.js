@@ -1,4 +1,6 @@
+import { useRef } from "react";
 import { useMutation } from "react-query";
+import ReCAPTCHA from "react-google-recaptcha";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { useHistory } from "react-router-dom";
@@ -19,6 +21,7 @@ const formInitValues = {
 };
 
 const LoginForm = () => {
+  const reRef = useRef();
   const history = useHistory();
   const [, userDispatch] = useAuth();
   const [mutateLoginUser] = useMutation(loginUser, {
@@ -41,7 +44,9 @@ const LoginForm = () => {
       initialValues={formInitValues}
       validationSchema={validator}
       onSubmit={async (values, { setSubmitting }) => {
-        await mutateLoginUser(values);
+        const token = await reRef.current.executeAsync();
+        reRef.current.reset();
+        await mutateLoginUser({ ...values, token });
         setSubmitting(false);
       }}
     >
@@ -81,6 +86,11 @@ const LoginForm = () => {
               Continue
             </Button>
           </Box>
+          <ReCAPTCHA
+            sitekey={process.env.REACT_APP_RECAPTCHA}
+            size="invisible"
+            ref={reRef}
+          />
         </Form>
       )}
     </Formik>

@@ -32,22 +32,21 @@ const useStyles = makeStyles({
   },
 });
 
-const uploadImage = async (img) => {
-  try {
-    const storageRef = app.storage().ref();
-    const fileRef = storageRef.child(img.name);
-    await fileRef.put(img);
-    return fileRef.getDownloadURL();
-  } catch (error) {
-    toast.error("something went wrong");
-    console.log(error);
-  }
-};
-
 const ContributeForm = () => {
   const history = useHistory();
   const [location, setLocation] = useState([27.7172, 85.324]);
   const classes = useStyles();
+
+  const uploadImage = async (img) => {
+    try {
+      const storageRef = app.storage().ref();
+      const fileRef = storageRef.child(img.name);
+      await fileRef.put(img);
+      return fileRef.getDownloadURL();
+    } catch (error) {
+      history.push("/error");
+    }
+  };
 
   const [mutatePlaces] = useMutation(addPlace, {
     onSuccess: (data) => {

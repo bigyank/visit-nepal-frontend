@@ -8,7 +8,7 @@ const createMessage = (matches) => {
   return (
     <>
       <Typography variant={matches ? "h5" : "body1"} align="center">
-        Sorry, We could not find the destination
+        Sorry,Something went wrong
       </Typography>
       <Typography variant={matches ? "body1" : "body2"} align="center">
         Please try again after a while
