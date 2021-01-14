@@ -12,6 +12,8 @@ import { useTheme } from "@material-ui/core/styles";
 import ReviewList from "./ReviewList";
 
 import searching from "../../images/searching.png";
+import { useState } from "react";
+import Pagination from "@material-ui/lab/Pagination";
 
 const styles = {
   searchContainer: {
@@ -27,8 +29,14 @@ const Review = ({ reviews, id }) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 2;
+  const indexOfLastReview = currentPage * postsPerPage;
+  const indexOfFirstReview = indexOfLastReview - postsPerPage;
+  const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
+
   return (
-    <Grid container justify="center">
+    <Grid container justify="center" direction="column">
       <Box
         m={matches ? 4 : 0}
         p={4}
@@ -59,7 +67,15 @@ const Review = ({ reviews, id }) => {
           <Divider />
         </Box>
         {reviews.length !== 0 ? (
-          <ReviewList reviews={reviews} />
+          <Box>
+            <Box py={2}>
+              <ReviewList
+                reviews={reviews}
+                currentReviews={currentReviews}
+                placeId={id}
+              />
+            </Box>
+          </Box>
         ) : (
           <Grid container justify="center">
             <Hidden xsDown>
@@ -69,6 +85,21 @@ const Review = ({ reviews, id }) => {
             </Hidden>
           </Grid>
         )}
+      </Box>
+      <Box
+        m={matches ? 4 : 0}
+        p={4}
+        width="95%"
+        bgcolor="white.500"
+        border={1}
+        borderColor="grey.300"
+      >
+        <Pagination
+          color="primary"
+          count={Math.ceil(reviews.length / postsPerPage)}
+          page={currentPage}
+          onChange={(_event, pnumber) => setCurrentPage(pnumber)}
+        />
       </Box>
     </Grid>
   );

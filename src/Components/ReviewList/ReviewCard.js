@@ -1,16 +1,18 @@
+import { useHistory } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
+import { useAuth } from "../../user-contex";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { red } from "@material-ui/core/colors";
 
 import Rating from "../Rating";
-import { Typography } from "@material-ui/core";
+import { CardActions, IconButton, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,18 +42,18 @@ export default function ReviewCard({
   img,
   user,
   title,
+  placeId,
 }) {
+  const history = useHistory();
+  const [{ user: userInfo }] = useAuth();
   const classes = useStyles();
+
+  const pointToEdit = () => history.push(`/place/${placeId}/edit/review`);
 
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={<Avatar src={user.displayPicture} />}
-        action={
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon className={classes.icon} />
-          </IconButton>
-        }
         title={user.displayName}
         subheader={createdAt}
       />
@@ -73,6 +75,16 @@ export default function ReviewCard({
 
         {ReactHtmlParser(comment)}
       </CardContent>
+      {userInfo && userInfo.user.id === user.id && (
+        <CardActions disableSpacing>
+          <IconButton aria-label="edit review">
+            <EditIcon onClick={pointToEdit} />
+          </IconButton>
+          <IconButton aria-label="delete review">
+            <DeleteIcon />
+          </IconButton>
+        </CardActions>
+      )}
     </Card>
   );
 }
