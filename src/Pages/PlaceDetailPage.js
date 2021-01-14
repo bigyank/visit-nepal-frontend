@@ -10,8 +10,33 @@ const PlaceDetail = ({ match }) => {
 
   const { isLoading, data } = useQuery(["placeDetail", id], getPlaceDetail);
 
-  if (isLoading) return <CircularProgress />;
-  if (!data) return <CircularProgress />;
+  if (isLoading)
+    return (
+      <div
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+
+  if (!data)
+    return (
+      <div
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
 
   return (
     <>

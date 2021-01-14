@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import Cards from "./CardSlider";
 import { getBestDestinations } from "../../services/place";
-import { Box, Typography } from "@material-ui/core";
+import { Box, CircularProgress, Typography } from "@material-ui/core";
 
 const BestDestination = () => {
   const { isLoading, data, isError } = useQuery(
@@ -9,7 +9,19 @@ const BestDestination = () => {
     getBestDestinations
   );
 
-  if (isLoading) return null;
+  if (isLoading)
+    return (
+      <div
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
   if (isError) return null;
 
   return (

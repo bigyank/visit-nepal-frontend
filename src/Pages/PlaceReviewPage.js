@@ -39,8 +39,33 @@ function PlaceReviewPlace({ match }) {
     getPlaceDetail
   );
 
-  if (isLoading) return <CircularProgress />;
-  if (!data) return <CircularProgress />;
+  if (isLoading)
+    return (
+      <div
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+
+  if (!data)
+    return (
+      <div
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
 
   return (
     <Box mx={matches ? 4 : 0} my={2}>

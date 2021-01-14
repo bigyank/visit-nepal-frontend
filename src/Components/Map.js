@@ -23,10 +23,34 @@ const Map = () => {
 
   const { isLoading, data } = useQuery("places", getAllPlaces);
 
-  if (isLoading) return <CircularProgress />;
+  if (isLoading)
+    return (
+      <div
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
 
   // seems like data becomes undefined just for a second after login
-  if (!data) return <CircularProgress />;
+  if (!data)
+    return (
+      <div
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
 
   return (
     <div>
