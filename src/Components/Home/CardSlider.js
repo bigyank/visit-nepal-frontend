@@ -20,8 +20,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
+    height: 200,
+    width: "100%",
+    objectFit: "cover",
   },
   icon: {
     color: red[400],

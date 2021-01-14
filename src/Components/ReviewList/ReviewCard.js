@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useMutation, queryCache } from "react-query";
 import ReactHtmlParser from "react-html-parser";
 import { useAuth } from "../../user-contex";
+import { toast } from "react-toastify";
+
 import { makeStyles } from "@material-ui/core/styles";
+import { CardActions, IconButton, Typography, Box } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -13,10 +17,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { red } from "@material-ui/core/colors";
 
 import Rating from "../Rating";
-import { CardActions, IconButton, Typography } from "@material-ui/core";
+import DialogBox from "../DialogBox";
 
 import { deleteReview } from "../../services/place";
-import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,42 +73,60 @@ export default function ReviewCard({
 
   const pointToEdit = () => history.push(`/place/${placeId}/edit/review`);
 
-  return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={<Avatar src={user.displayPicture} />}
-        title={user.displayName}
-        subheader={createdAt}
-      />
-      {img && (
-        <CardMedia className={classes.media} image={img} alt="user img" />
-      )}
-      <CardContent>
-        <Rating rating={rating} />
-        {title && (
-          <Typography gutterBottom variant="h5" component="h2">
-            {title}
-          </Typography>
-        )}
+  // for dialog
+  const [open, setOpen] = useState(false);
 
-        {ReactHtmlParser(comment)}
-      </CardContent>
-      {userInfo && userInfo.user.id === user.id && (
-        <CardActions disableSpacing>
-          <IconButton aria-label="edit review" onClick={pointToEdit}>
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            aria-label="delete review"
-            onClick={() => {
-              mutateDeleteReview(placeId);
-              toast.warning("review deleted");
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
-        </CardActions>
-      )}
-    </Card>
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleDelete = () => {
+    mutateDeleteReview(placeId);
+    toast.warning("review deleted");
+    setOpen(false);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  return (
+    <Box>
+      <Card className={classes.root}>
+        <CardHeader
+          avatar={<Avatar src={user.displayPicture} />}
+          title={user.displayName}
+          subheader={createdAt}
+        />
+        {img && (
+          <CardMedia className={classes.media} image={img} alt="user img" />
+        )}
+        <CardContent>
+          <Rating rating={rating} />
+          {title && (
+            <Typography gutterBottom variant="h5" component="h2">
+              {title}
+            </Typography>
+          )}
+
+          {ReactHtmlParser(comment)}
+        </CardContent>
+        {userInfo && userInfo.user.id === user.id && (
+          <CardActions disableSpacing>
+            <IconButton aria-label="edit review" onClick={pointToEdit}>
+              <EditIcon />
+            </IconButton>
+            <IconButton aria-label="delete review" onClick={handleClickOpen}>
+              <DeleteIcon />
+            </IconButton>
+          </CardActions>
+        )}
+      </Card>
+
+      <DialogBox
+        open={open}
+        handleClose={handleClose}
+        handleConfirm={handleDelete}
+      />
+    </Box>
   );
 }

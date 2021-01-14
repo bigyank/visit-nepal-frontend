@@ -68,7 +68,7 @@ const Review = ({ reviews, id }) => {
         </Box>
         {reviews.length !== 0 ? (
           <Box>
-            <Box py={2}>
+            <Box>
               <ReviewList currentReviews={currentReviews} placeId={id} />
             </Box>
           </Box>
