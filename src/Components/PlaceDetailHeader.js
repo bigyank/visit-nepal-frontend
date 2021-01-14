@@ -1,3 +1,4 @@
+import { useAuth } from "../user-contex";
 import {
   Paper,
   Box,
@@ -12,6 +13,8 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Button,
+  ButtonGroup,
 } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
@@ -32,6 +35,7 @@ const useStyles = makeStyles({
 });
 
 const PlaceDetailHeader = ({ data }) => {
+  const [{ user: userInfo }] = useAuth();
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -48,15 +52,39 @@ const PlaceDetailHeader = ({ data }) => {
             />
           </Grid>
           <Grid container item xs={12} md={6} direction="column" spacing={1}>
-            <Grid item>
-              <Typography
-                variant="h4"
-                color="primary"
-                className={classes.typographyStyles}
+            <Grid item container direction="column">
+              <Grid
+                item
+                container
+                justify="space-between"
+                alignItems="center"
+                style={{ marginBottom: "1rem" }}
               >
-                {data.name}
-              </Typography>
-              <Divider />
+                <Box>
+                  <Typography
+                    variant="h4"
+                    color="primary"
+                    className={classes.typographyStyles}
+                  >
+                    {data.name}
+                  </Typography>
+                </Box>
+                {userInfo && userInfo.user.id === data.author.id && (
+                  <Box>
+                    <ButtonGroup
+                      variant="outlined"
+                      color="secondary"
+                      aria-label="place action button group"
+                    >
+                      <Button>Edit</Button>
+                      <Button>Delete</Button>
+                    </ButtonGroup>
+                  </Box>
+                )}
+              </Grid>
+              <Box>
+                <Divider />
+              </Box>
               <Typography
                 variant="h6"
                 color="textSecondary"
