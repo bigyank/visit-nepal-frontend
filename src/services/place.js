@@ -52,3 +52,11 @@ export const getPlaceByQuery = async (_id, query) => {
   });
   return response.data;
 };
+
+export const editReview = async (data) => {
+  const { id, review } = data;
+  const response = await axios.put(BASE_URL.concat(`/${id}/reviews`), review, {
+    withCredentials: true,
+  });
+  return response.data;
+};

@@ -34,7 +34,11 @@ function App() {
         <AuthRoute path="/contribute" component={ContributePage} />
         <GuestRoute exact path="/password/request" component={ForgotPassPage} />
         <GuestRoute path="/password/recover/:id" component={ResetPassPage} />
-        <AuthRoute path="/place/:id/review" component={PlaceReviewPage} />
+        <AuthRoute
+          exact
+          path="/place/:id/:action/review"
+          component={PlaceReviewPage}
+        />
         <AuthRoute path="/place/:id" component={PlaceDetailPage} />
         <AuthRoute path="/notfound" component={NotFoundPage} />
         <AuthRoute path="/error" component={ErrorPage} />

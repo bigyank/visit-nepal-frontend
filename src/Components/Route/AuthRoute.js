@@ -26,7 +26,7 @@ const AuthRoute = ({ component: Component, ...rest }) => {
   // after sucessful fetch update the user contex
   useEffect(() => {
     if (data) {
-      userDispatch({ type: "login", payload: { user: true } });
+      userDispatch({ type: "login", payload: { user: data } });
     }
   }, [data, userDispatch]);
 

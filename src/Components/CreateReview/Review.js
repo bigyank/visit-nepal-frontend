@@ -14,11 +14,10 @@ import {
 import Editor from "./Editor";
 import StarRating from "./StarRating";
 
-import { makeReview } from "../../services/place";
 import { PhotoCamera } from "@material-ui/icons";
 import { app } from "../../firebaase";
 
-const Review = ({ id }) => {
+const Review = ({ id, reviewMethod, reviewAction }) => {
   const history = useHistory();
 
   const [rating, setRating] = useState(0);
@@ -27,12 +26,14 @@ const Review = ({ id }) => {
   const [file, setFile] = useState(null);
   const [isSubmitting, setSubmitting] = useState(false);
 
-  const [mutateMakeReview] = useMutation(makeReview, {
-    onSuccess: (data) => {
-      toast.info("Review added sucessfully");
-      setValue("");
-      setRating(0);
-      history.push(`/place/${data.id}`);
+  const [mutateMakeReview] = useMutation(reviewMethod, {
+    onSuccess: () => {
+      toast.info(
+        reviewAction === "write"
+          ? "review added sucessfully"
+          : "review edited sucessfully"
+      );
+      history.push(`/place/${id}`);
     },
 
     onError: (error) => {
@@ -58,7 +59,10 @@ const Review = ({ id }) => {
 
   const handleReviewSubmit = async () => {
     setSubmitting(true);
-    const reviewToAdd = { rating, comment: value };
+    const reviewToAdd = { rating };
+    if (value !== "") {
+      reviewToAdd.comment = value;
+    }
     if (file) {
       const uploadedImg = await uploadImage(file);
       reviewToAdd.img = uploadedImg;

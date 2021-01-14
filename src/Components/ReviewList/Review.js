@@ -48,7 +48,7 @@ const Review = ({ reviews, id }) => {
                 variant="contained"
                 color="primary"
                 size={matches ? "large" : "medium"}
-                to={`/place/${id}/review`}
+                to={`/place/${id}/write/review`}
               >
                 Write a Review
               </Button>
