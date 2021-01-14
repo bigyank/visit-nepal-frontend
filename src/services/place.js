@@ -60,3 +60,10 @@ export const editReview = async (data) => {
   });
   return response.data;
 };
+
+export const deleteReview = async (id) => {
+  const response = await axios.delete(BASE_URL.concat(`/${id}/reviews`), {
+    withCredentials: true,
+  });
+  return response.data;
+};

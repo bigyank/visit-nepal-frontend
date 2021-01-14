@@ -36,7 +36,7 @@ const Review = ({ reviews, id }) => {
   const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
   return (
-    <Grid container justify="center" direction="column">
+    <Grid container justify="center" alignItems="center" direction="column">
       <Box
         m={matches ? 4 : 0}
         p={4}
@@ -69,11 +69,7 @@ const Review = ({ reviews, id }) => {
         {reviews.length !== 0 ? (
           <Box>
             <Box py={2}>
-              <ReviewList
-                reviews={reviews}
-                currentReviews={currentReviews}
-                placeId={id}
-              />
+              <ReviewList currentReviews={currentReviews} placeId={id} />
             </Box>
           </Box>
         ) : (
@@ -86,21 +82,23 @@ const Review = ({ reviews, id }) => {
           </Grid>
         )}
       </Box>
-      <Box
-        m={matches ? 4 : 0}
-        p={4}
-        width="95%"
-        bgcolor="white.500"
-        border={1}
-        borderColor="grey.300"
-      >
-        <Pagination
-          color="primary"
-          count={Math.ceil(reviews.length / postsPerPage)}
-          page={currentPage}
-          onChange={(_event, pnumber) => setCurrentPage(pnumber)}
-        />
-      </Box>
+      {reviews.length !== 0 && (
+        <Box
+          m={matches ? 4 : 0}
+          p={4}
+          width="95%"
+          bgcolor="white.500"
+          border={1}
+          borderColor="grey.300"
+        >
+          <Pagination
+            color="primary"
+            count={Math.ceil(reviews.length / postsPerPage)}
+            page={currentPage}
+            onChange={(_event, pnumber) => setCurrentPage(pnumber)}
+          />
+        </Box>
+      )}
     </Grid>
   );
 };

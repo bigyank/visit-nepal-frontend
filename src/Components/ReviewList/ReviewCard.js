@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import { useMutation, queryCache } from "react-query";
 import ReactHtmlParser from "react-html-parser";
 import { useAuth } from "../../user-contex";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,6 +14,9 @@ import { red } from "@material-ui/core/colors";
 
 import Rating from "../Rating";
 import { CardActions, IconButton, Typography } from "@material-ui/core";
+
+import { deleteReview } from "../../services/place";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +52,20 @@ export default function ReviewCard({
   const [{ user: userInfo }] = useAuth();
   const classes = useStyles();
 
+  const [mutateDeleteReview] = useMutation(deleteReview, {
+    onSuccess: () => {
+      queryCache.refetchQueries("placeDetail");
+    },
+    onError: (error) => {
+      const errMessage =
+        error.response && error.response.data.error
+          ? error.response.data.error.message
+          : error.message;
+
+      toast.error(errMessage);
+    },
+  });
+
   const pointToEdit = () => history.push(`/place/${placeId}/edit/review`);
 
   return (
@@ -77,10 +95,16 @@ export default function ReviewCard({
       </CardContent>
       {userInfo && userInfo.user.id === user.id && (
         <CardActions disableSpacing>
-          <IconButton aria-label="edit review">
-            <EditIcon onClick={pointToEdit} />
+          <IconButton aria-label="edit review" onClick={pointToEdit}>
+            <EditIcon />
           </IconButton>
-          <IconButton aria-label="delete review">
+          <IconButton
+            aria-label="delete review"
+            onClick={() => {
+              mutateDeleteReview(placeId);
+              toast.warning("review deleted");
+            }}
+          >
             <DeleteIcon />
           </IconButton>
         </CardActions>
