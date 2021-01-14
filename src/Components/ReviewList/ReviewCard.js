@@ -29,7 +29,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   media: {
-    paddingTop: "56.25%", // 16:9
+    height: 250,
+    width: "100%",
+    objectFit: "cover",
   },
   icon: {
     color: red[400],
@@ -76,12 +78,7 @@ export default function ReviewCard({
         subheader={createdAt}
       />
       {img && (
-        <CardMedia
-          className={classes.media}
-          image={img}
-          alt="user img"
-          height="140"
-        />
+        <CardMedia className={classes.media} image={img} alt="user img" />
       )}
       <CardContent>
         <Rating rating={rating} />
