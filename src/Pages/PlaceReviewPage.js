@@ -44,7 +44,7 @@ function PlaceReviewPlace({ match }) {
 
   // if action is other than write or edit, redirect
   useEffect(() => {
-    if (action !== "write" && action !== "edit");
+    if (action !== "write" && action !== "edit") history.push("/");
   }, [action, history]);
 
   const { isLoading, data } = useQuery(
@@ -55,8 +55,11 @@ function PlaceReviewPlace({ match }) {
   // if user haven't review this place then redirect
   useEffect(() => {
     if (action === "edit" && data && user) {
-      const review = data.reviews.find((review) => review.author === user.id);
-      if (!review) return history.push("/");
+      const review = data.reviews.find(
+        (review) => review.user.id === user.user.id
+      );
+
+      if (!review) history.push("/");
     }
   }, [action, data, history, user]);
 
