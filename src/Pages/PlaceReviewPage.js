@@ -1,15 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../user-contex";
 
-import {
-  Grid,
-  Typography,
-  Paper,
-  Box,
-  CircularProgress,
-  Divider,
-} from "@material-ui/core";
+import { Grid, Typography, Paper, Box, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useQuery } from "react-query";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -17,6 +10,8 @@ import { useTheme } from "@material-ui/core/styles";
 import Review from "../Components/CreateReview/Review";
 import { getPlaceDetail } from "../services/place";
 import { makeReview, editReview } from "../services/place";
+
+import LoadingIndicator from "../Components/LoadingIndicator";
 
 const useStyles = makeStyles((theme) => ({
   reviewStyles: {
@@ -34,13 +29,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PlaceReviewPlace({ match }) {
+  const { id, action } = match.params;
+  const [editable, setEditable] = useState(action === "edit" ? null : true);
   const [{ user }] = useAuth();
   const history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-
-  const { id, action } = match.params;
 
   // if action is other than write or edit, redirect
   useEffect(() => {
@@ -59,37 +54,12 @@ function PlaceReviewPlace({ match }) {
         (review) => review.user.id === user.user.id
       );
 
-      if (!review) history.push("/");
+      if (!review) history.push(`/place/${id}`);
+      setEditable(review);
     }
-  }, [action, data, history, user]);
+  }, [action, data, history, user, id]);
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          height: "90vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <CircularProgress />
-      </div>
-    );
-
-  if (!data)
-    return (
-      <div
-        style={{
-          height: "90vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <CircularProgress />
-      </div>
-    );
+  if (isLoading || !data || !editable) return <LoadingIndicator />;
 
   return (
     <Box mx={matches ? 4 : 0} my={2}>
@@ -119,6 +89,7 @@ function PlaceReviewPlace({ match }) {
             id={id}
             reviewMethod={action === "write" ? makeReview : editReview}
             reviewAction={action}
+            editData={editable}
           />
         </Paper>
       </Grid>

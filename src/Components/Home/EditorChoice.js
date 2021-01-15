@@ -1,7 +1,9 @@
 import { useQuery } from "react-query";
 import Cards from "./CardSlider";
 import { getEditorChoice } from "../../services/place";
-import { Box, CircularProgress, Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
+
+import LoadingIndicator from "../LoadingIndicator";
 
 const EditorChoice = () => {
   const { isLoading, data, isError } = useQuery(
@@ -9,19 +11,8 @@ const EditorChoice = () => {
     getEditorChoice
   );
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          height: "90vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <CircularProgress />
-      </div>
-    );
+  if (isLoading) return <LoadingIndicator />;
+
   if (isError) return null;
 
   return (

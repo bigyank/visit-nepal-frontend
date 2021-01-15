@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useQuery } from "react-query";
 
-import { CircularProgress } from "@material-ui/core";
-
 import { useAuth } from "../../user-contex";
 import { getUser } from "../../services/user";
+
+import LoadingIndicator from "../LoadingIndicator";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
   const [userState, userDispatch] = useAuth();
@@ -34,19 +34,7 @@ const AuthRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={() => {
-        if (isLoading)
-          return (
-            <div
-              style={{
-                height: "90vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <CircularProgress />
-            </div>
-          );
+        if (isLoading) return <LoadingIndicator />;
         if (error) return <Redirect to="/login" />;
         return <Route {...rest} component={Component} />;
       }}

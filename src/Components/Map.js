@@ -1,6 +1,6 @@
 import { Link as RouterLink } from "react-router-dom";
 import { useQuery } from "react-query";
-import { CircularProgress, Link } from "@material-ui/core";
+import { Link } from "@material-ui/core";
 import {
   MapContainer,
   TileLayer,
@@ -9,6 +9,8 @@ import {
   useMapEvent,
 } from "react-leaflet";
 import { getAllPlaces } from "../services/place";
+
+import LoadingIndicator from "./LoadingIndicator";
 
 const Map = () => {
   function SetViewOnClick() {
@@ -23,34 +25,8 @@ const Map = () => {
 
   const { isLoading, data } = useQuery("places", getAllPlaces);
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          height: "90vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <CircularProgress />
-      </div>
-    );
-
   // seems like data becomes undefined just for a second after login
-  if (!data)
-    return (
-      <div
-        style={{
-          height: "90vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <CircularProgress />
-      </div>
-    );
+  if (isLoading || !data) return <LoadingIndicator />;
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, queryCache } from "react-query";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -11,23 +11,25 @@ import {
   TextField,
   IconButton,
 } from "@material-ui/core";
+
 import Editor from "./Editor";
 import StarRating from "./StarRating";
 
 import { PhotoCamera } from "@material-ui/icons";
 import { app } from "../../firebaase";
 
-const Review = ({ id, reviewMethod, reviewAction }) => {
+const Review = ({ id, reviewMethod, reviewAction, editData }) => {
   const history = useHistory();
 
-  const [rating, setRating] = useState(0);
-  const [value, setValue] = useState("");
-  const [title, setTitle] = useState("");
+  const [rating, setRating] = useState(() => editData.rating || 0);
+  const [value, setValue] = useState(() => editData.comment || "");
+  const [title, setTitle] = useState(() => editData.title || "");
   const [file, setFile] = useState(null);
   const [isSubmitting, setSubmitting] = useState(false);
 
   const [mutateMakeReview] = useMutation(reviewMethod, {
     onSuccess: () => {
+      queryCache.refetchQueries("placeDetailReview");
       toast.info(
         reviewAction === "write"
           ? "review added sucessfully"
