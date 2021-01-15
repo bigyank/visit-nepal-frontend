@@ -42,15 +42,28 @@ const Map = () => {
         {data.map((info, index) => (
           <Marker key={index} position={info.location}>
             <Popup>
-              <div style={{ width: "250px", height: "auto" }}>
+              <div style={{ width: "300px", height: "auto" }}>
                 <h2>{info.name}</h2>
-                <h4>{info.type}</h4>
+                <h4 style={{ color: "gray" }}>{info.type}</h4>
                 <img
-                  style={{ width: "100%", height: "auto" }}
+                  style={{
+                    width: "100%",
+                    maxHeight: "200px",
+                    objectFit: "cover",
+                  }}
                   src={info.image}
                   alt={info.name}
                 />
-                <p>{info.description}</p>
+                <p
+                  style={{
+                    width: "300px",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {info.description}
+                </p>
                 <p>
                   <Link component={RouterLink} to={`/place/${info.id}`}>
                     View
