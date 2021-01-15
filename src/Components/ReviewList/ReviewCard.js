@@ -23,12 +23,12 @@ import { deleteReview } from "../../services/place";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 500,
+    maxWidth: "60%",
     [theme.breakpoints.down("sm")]: {
-      maxWidth: 300,
+      maxWidth: "100%",
     },
     [theme.breakpoints.down("md")]: {
-      maxWidth: 400,
+      maxWidth: "100%",
     },
   },
   media: {

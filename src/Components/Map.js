@@ -54,16 +54,7 @@ const Map = () => {
                   src={info.image}
                   alt={info.name}
                 />
-                <p
-                  style={{
-                    width: "300px",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {info.description}
-                </p>
+                <p>{info.description.slice(0, 150).concat("...")}</p>
                 <p>
                   <Link component={RouterLink} to={`/place/${info.id}`}>
                     View

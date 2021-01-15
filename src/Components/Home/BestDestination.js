@@ -17,7 +17,9 @@ const BestDestination = () => {
   return (
     <Box mb={4}>
       <Box px={2}>
-        <Typography variant="h5">Top Rated Destinations</Typography>
+        {data.length > 0 && (
+          <Typography variant="h5">Top Rated Destinations</Typography>
+        )}
       </Box>
       <Cards editorData={data} />
     </Box>

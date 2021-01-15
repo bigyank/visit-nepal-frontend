@@ -18,7 +18,7 @@ const EditorChoice = () => {
   return (
     <Box mb={4}>
       <Box px={2}>
-        <Typography variant="h5">Editor's Pick</Typography>
+        {data.length > 0 && <Typography variant="h5">Editor's Pick</Typography>}
       </Box>
       <Cards editorData={data} />
     </Box>
