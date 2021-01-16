@@ -65,6 +65,8 @@ const PlaceDetailHeader = ({ data }) => {
     },
   });
 
+  const pushToEdit = () => history.push(`/place/edit/${data.id}`);
+
   // for dialog
   const [open, setOpen] = useState(false);
 
@@ -123,7 +125,7 @@ const PlaceDetailHeader = ({ data }) => {
                       color="secondary"
                       aria-label="place action button group"
                     >
-                      <Button>Edit</Button>
+                      <Button onClick={pushToEdit}>Edit</Button>
                       <Button onClick={handleClickOpen}>Delete</Button>
                     </ButtonGroup>
                   </Box>

@@ -3,7 +3,8 @@ import axios from "axios";
 const BASE_URL = "/api/places";
 
 export const addPlace = async (placeInfo) => {
-  const response = await axios.post(BASE_URL, placeInfo, {
+  const { id, ...placeToAdd } = placeInfo;
+  const response = await axios.post(BASE_URL, placeToAdd, {
     withCredentials: true,
   });
   return response.data;
@@ -70,6 +71,14 @@ export const deleteReview = async (id) => {
 
 export const deletePlace = async (id) => {
   const response = await axios.delete(BASE_URL.concat(`/${id}`), {
+    withCredentials: true,
+  });
+  return response.data;
+};
+
+export const editPlace = async (placeInfo) => {
+  const { id, ...placeToEdit } = placeInfo;
+  const response = await axios.put(BASE_URL.concat(`/${id}`), placeToEdit, {
     withCredentials: true,
   });
   return response.data;

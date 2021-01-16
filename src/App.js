@@ -14,6 +14,7 @@ import ForgotPassPage from "./Pages/ForgotPassPage";
 import ResetPassPage from "./Pages/ResetPassPage";
 import PlaceDetailPage from "./Pages/PlaceDetailPage";
 import PlaceReviewPage from "./Pages/PlaceReviewPage";
+import PlaceEditPage from "./Pages/PlaceEditPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import ErrorPage from "./Pages/ErrorPage";
 import EmailConfirmPage from "./Pages/EmailConfirmPage";
@@ -32,10 +33,11 @@ function App() {
       <Switch>
         <GuestRoute path="/login" component={LoginPage} />
         <GuestRoute path="/signup" component={SignupPage} />
-        <AuthRoute path="/explore" component={ExplorePage} />
-        <AuthRoute path="/contribute" component={ContributePage} />
         <GuestRoute exact path="/password/request" component={ForgotPassPage} />
         <GuestRoute path="/password/recover/:id" component={ResetPassPage} />
+        <AuthRoute path="/explore" component={ExplorePage} />
+        <AuthRoute path="/contribute" component={ContributePage} />
+        <AuthRoute path="/place/edit/:id" component={PlaceEditPage} />
         <AuthRoute
           exact
           path="/place/:id/:action/review"

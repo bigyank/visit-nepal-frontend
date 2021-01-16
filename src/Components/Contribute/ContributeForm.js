@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, queryCache } from "react-query";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { toast } from "react-toastify";
@@ -34,9 +34,11 @@ const useStyles = makeStyles({
   },
 });
 
-const ContributeForm = () => {
+const ContributeForm = ({ placeData = {}, placeEdit }) => {
   const history = useHistory();
-  const [location, setLocation] = useState([27.7172, 85.324]);
+  const [location, setLocation] = useState(
+    () => placeData.location || [27.7172, 85.324]
+  );
   const classes = useStyles();
 
   const uploadImage = async (img) => {
@@ -50,9 +52,11 @@ const ContributeForm = () => {
     }
   };
 
-  const [mutatePlaces] = useMutation(addPlace, {
+  const mutateAction = placeEdit || addPlace;
+
+  const [mutatePlaces] = useMutation(mutateAction, {
     onSuccess: (data) => {
-      toast.success("location added");
+      toast.success(placeEdit ? "location edited" : "location added");
       history.push(`/place/${data.id}`);
     },
     onError: (error) => {
@@ -68,22 +72,29 @@ const ContributeForm = () => {
   return (
     <Formik
       initialValues={{
-        name: "",
-        description: "",
-        type: "landmark",
-        location: [27.7172, 85.324],
+        name: placeData.name || "",
+        description: placeData.description || "",
+        type: placeData.type || "landmark",
+        location: placeData.location || [27.7172, 85.324],
         img: null,
+        image: placeData.image || null,
       }}
       validationSchema={validator}
       onSubmit={async (values, { setSubmitting }) => {
-        if (values.img) {
-          const uploadedImg = await uploadImage(values.img);
-          values.img = uploadedImg;
+        if (!values.image) {
+          if (values.img) {
+            const uploadedImg = await uploadImage(values.img);
+            values.img = uploadedImg;
+          } else {
+            toast.error("image is required");
+            return;
+          }
         } else {
-          toast.error("image is required");
-          return;
+          values.img = values.image;
         }
+
         await mutatePlaces({
+          id: placeData.id || null,
           name: values.name,
           description: values.description,
           image: values.img,
@@ -170,7 +181,7 @@ const ContributeForm = () => {
               disabled={isSubmitting}
               onClick={submitForm}
             >
-              Add
+              {placeEdit ? "Update" : "Add"}
             </Button>
           </Box>
         </Form>
