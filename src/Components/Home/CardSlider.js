@@ -8,8 +8,6 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import { Box, CardActionArea } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 
@@ -58,15 +56,7 @@ const CardSlider = ({ editorData }) => {
         <Box key={data.id} p={2}>
           <Card className={classes.root}>
             <CardActionArea component={Link} to={`/place/${data.id}`}>
-              <CardHeader
-                title={data.name}
-                subheader={data.type}
-                action={
-                  <IconButton aria-label="settings">
-                    <FavoriteIcon className={classes.icon} />
-                  </IconButton>
-                }
-              />
+              <CardHeader title={data.name} subheader={data.type} />
               <CardMedia className={classes.media} image={data.image} />
             </CardActionArea>
             <CardContent>
