@@ -67,3 +67,10 @@ export const deleteReview = async (id) => {
   });
   return response.data;
 };
+
+export const deletePlace = async (id) => {
+  const response = await axios.delete(BASE_URL.concat(`/${id}`), {
+    withCredentials: true,
+  });
+  return response.data;
+};

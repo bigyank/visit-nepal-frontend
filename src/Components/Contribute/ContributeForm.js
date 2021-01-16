@@ -44,7 +44,7 @@ const ContributeForm = () => {
       await fileRef.put(img);
       return fileRef.getDownloadURL();
     } catch (error) {
-      history.push("/error");
+      console.log(error);
     }
   };
 

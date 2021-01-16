@@ -8,7 +8,13 @@ import {
 } from "@material-ui/core";
 import React from "react";
 
-const DialogBox = ({ open, handleClose, handleConfirm }) => {
+const DialogBox = ({
+  open,
+  handleClose,
+  handleConfirm,
+  headerMessage,
+  bodyMessage,
+}) => {
   return (
     <Dialog
       open={open}
@@ -16,11 +22,10 @@ const DialogBox = ({ open, handleClose, handleConfirm }) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{"Delete this review?"}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{headerMessage}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          You'll not be able to recover this review. Are you sure about this
-          action?
+          {bodyMessage}
         </DialogContentText>
       </DialogContent>
       <DialogActions>

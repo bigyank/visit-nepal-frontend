@@ -1,4 +1,8 @@
+import { useState } from "react";
+import { useMutation } from "react-query";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../user-contex";
+import { toast } from "react-toastify";
 import {
   Paper,
   Box,
@@ -19,6 +23,9 @@ import {
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import Rating from "../Components/Rating";
+import DialogBox from "./DialogBox";
+
+import { deletePlace } from "../services/place";
 
 const useStyles = makeStyles({
   paperStyles: {
@@ -35,13 +42,51 @@ const useStyles = makeStyles({
 });
 
 const PlaceDetailHeader = ({ data }) => {
+  const history = useHistory();
   const [{ user: userInfo }] = useAuth();
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
+  const [mutateDeletePlace] = useMutation(deletePlace, {
+    onSuccess: () => {
+      toast.warn("place deleted");
+      history.push("/");
+    },
+    onError: (error) => {
+      const errMessage =
+        error.response && error.response.data.error
+          ? error.response.data.error.message
+          : error.message;
+
+      toast.error(errMessage);
+    },
+  });
+
+  // for dialog
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleDelete = () => {
+    mutateDeletePlace(data.id);
+    setOpen(false);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <Box m={matches ? 4 : 0}>
+      <DialogBox
+        open={open}
+        handleClose={handleClose}
+        handleConfirm={handleDelete}
+        headerMessage="Delete this Place?"
+        bodyMessage="You will not be able to recover this place. Are you sure about this action?"
+      />
       <Paper className={classes.paperStyles}>
         <Grid container alignContent="center" spacing={4}>
           <Grid item xs={12} md={6}>
@@ -77,7 +122,7 @@ const PlaceDetailHeader = ({ data }) => {
                       aria-label="place action button group"
                     >
                       <Button>Edit</Button>
-                      <Button>Delete</Button>
+                      <Button onClick={handleClickOpen}>Delete</Button>
                     </ButtonGroup>
                   </Box>
                 )}

@@ -126,6 +126,9 @@ export default function ReviewCard({
         open={open}
         handleClose={handleClose}
         handleConfirm={handleDelete}
+        headerMessage="Delete this review?"
+        bodyMessage=" You'll not be able to recover this review. Are you sure about this
+          action?"
       />
     </Box>
   );
