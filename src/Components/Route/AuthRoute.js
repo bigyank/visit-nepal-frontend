@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useQuery } from "react-query";
-
 import { useAuth } from "../../user-contex";
-import { getUser } from "../../services/user";
 
 import LoadingIndicator from "../LoadingIndicator";
+
+import { getUser } from "../../services/user";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
   const [userState, userDispatch] = useAuth();

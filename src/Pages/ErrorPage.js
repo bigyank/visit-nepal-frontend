@@ -1,7 +1,9 @@
 import { Typography } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 import InfoBox from "../Components/InfoBox";
+
 import error from "../images/error.png";
 
 const createMessage = (matches) => {

@@ -1,8 +1,11 @@
 import { Link as RouterLink } from "react-router-dom";
+
 import { Typography, Link } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 import InfoBox from "../Components/InfoBox";
+
 import empty from "../images/empty.png";
 
 const createMessage = (matches) => {

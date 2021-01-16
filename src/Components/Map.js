@@ -1,6 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
 import { useQuery } from "react-query";
-import { Link } from "@material-ui/core";
 import {
   MapContainer,
   TileLayer,
@@ -8,9 +7,12 @@ import {
   Popup,
   useMapEvent,
 } from "react-leaflet";
-import { getAllPlaces } from "../services/place";
+
+import { Link } from "@material-ui/core";
 
 import LoadingIndicator from "./LoadingIndicator";
+
+import { getAllPlaces } from "../services/place";
 
 const Map = () => {
   function SetViewOnClick() {

@@ -1,9 +1,11 @@
 import { useQuery } from "react-query";
-import Cards from "./CardSlider";
-import { getEditorChoice } from "../../services/place";
+
 import { Box, Typography } from "@material-ui/core";
 
+import Cards from "./CardSlider";
 import LoadingIndicator from "../LoadingIndicator";
+
+import { getEditorChoice } from "../../services/place";
 
 const EditorChoice = () => {
   const { isLoading, data, isError } = useQuery(

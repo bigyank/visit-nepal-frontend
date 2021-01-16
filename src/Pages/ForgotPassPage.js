@@ -1,5 +1,6 @@
 import { Grid, Paper, Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+
 import ForgotPassForm from "../Components/ForgotPassForm";
 
 const useStyles = makeStyles({

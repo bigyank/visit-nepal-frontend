@@ -1,6 +1,8 @@
-import { Box } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+
+import { Box } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
+
 import HeaderSearch from "../Components/Home/HeaderSearch";
 import HomeContribute from "../Components/Home/HomeContribute";
 import HomeGuide from "../Components/Home/HomeGuide";

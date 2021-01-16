@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import {
   Box,
   Grid,
@@ -7,13 +9,13 @@ import {
   Divider,
   Hidden,
 } from "@material-ui/core";
+import Pagination from "@material-ui/lab/Pagination";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
+
 import ReviewList from "./ReviewList";
 
 import searching from "../../images/searching.png";
-import { useState } from "react";
-import Pagination from "@material-ui/lab/Pagination";
 
 const styles = {
   searchContainer: {

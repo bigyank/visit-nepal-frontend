@@ -1,10 +1,12 @@
 import { useHistory } from "react-router-dom";
 import { useMutation } from "react-query";
-import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import { toast } from "react-toastify";
-import { Button, LinearProgress, Box } from "@material-ui/core";
+
+import { Formik, Form, Field } from "formik";
 import { TextField } from "formik-material-ui";
+import { Button, LinearProgress, Box } from "@material-ui/core";
+
 import { confirmPassReset } from "../services/auth";
 
 const validator = yup.object({

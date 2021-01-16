@@ -1,6 +1,8 @@
-import React from "react";
+import { useState } from "react";
+
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+
 import RatingIcon from "./RatingIcon";
 
 const useStyles = makeStyles({
@@ -10,7 +12,7 @@ const useStyles = makeStyles({
 });
 
 const StarRating = ({ rating, setRating }) => {
-  const [hoverRating, setHoverRating] = React.useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
   const classes = useStyles();
 
   const onMouseEnter = (index) => {

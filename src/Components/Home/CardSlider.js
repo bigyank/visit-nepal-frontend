@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -9,9 +11,9 @@ import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { Box, CardActionArea } from "@material-ui/core";
+import { red } from "@material-ui/core/colors";
 
 import Rating from "../Rating";
-import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {

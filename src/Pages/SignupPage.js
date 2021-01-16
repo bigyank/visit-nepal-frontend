@@ -1,6 +1,7 @@
 import { Grid, Typography, Paper, Box, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { GTranslate } from "@material-ui/icons/";
+
 import SignupForm from "../Components/SignupForm";
 import DividerWithText from "../Components/DividerWithText";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import { green } from "@material-ui/core/colors";

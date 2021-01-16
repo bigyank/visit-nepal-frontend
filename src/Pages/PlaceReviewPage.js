@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useQuery } from "react-query";
 import { useAuth } from "../user-contex";
 
 import { Grid, Typography, Paper, Box, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useQuery } from "react-query";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
+
 import Review from "../Components/CreateReview/Review";
+import LoadingIndicator from "../Components/LoadingIndicator";
+
 import { getPlaceDetail } from "../services/place";
 import { makeReview, editReview } from "../services/place";
-
-import LoadingIndicator from "../Components/LoadingIndicator";
 
 const useStyles = makeStyles((theme) => ({
   reviewStyles: {

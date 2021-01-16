@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
-import { Formik, Form, Field } from "formik";
 import { toast } from "react-toastify";
+
+import { Formik, Form, Field } from "formik";
 import {
   Button,
   LinearProgress,
@@ -15,10 +16,11 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Select } from "formik-material-ui";
 
-import { app } from "../../firebaase";
 import ContributeMap from "./ContributeMap";
 import PlacesSearch from "./PlacesSearch";
 import UploadButton from "./UploadButton";
+
+import { app } from "../../firebaase";
 import { addPlace } from "../../services/place";
 
 const validator = yup.object({

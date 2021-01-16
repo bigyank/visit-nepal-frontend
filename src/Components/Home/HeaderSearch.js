@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { useHistory } from "react-router-dom";
+
 import {
   Paper,
   Grid,
@@ -12,6 +13,7 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+
 import { getPlaceByQuery } from "../../services/place";
 
 import explore from "../../images/explore.png";

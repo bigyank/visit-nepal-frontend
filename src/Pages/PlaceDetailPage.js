@@ -1,7 +1,9 @@
 import { useQuery } from "react-query";
+
 import PlaceDetailHeader from "../Components/PlaceDetailHeader";
 import PlaceDetailMap from "../Components/PlaceDetailMap";
 import Review from "../Components/ReviewList/Review";
+
 import { getPlaceDetail } from "../services/place";
 
 import LoadingIndicator from "../Components/LoadingIndicator";
