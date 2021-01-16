@@ -1,4 +1,4 @@
-import { CircularProgress } from "@material-ui/core";
+import traveller from "../images/traveler.gif";
 
 const LoadingIndicator = () => {
   return (
@@ -10,7 +10,11 @@ const LoadingIndicator = () => {
         alignItems: "center",
       }}
     >
-      <CircularProgress />
+      <img
+        src={traveller}
+        style={{ width: "auto", height: "200px" }}
+        alt="traveller"
+      />
     </div>
   );
 };
