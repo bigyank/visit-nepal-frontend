@@ -4,6 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardActions,
   CardContent,
@@ -21,16 +22,19 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 
 import pattern from "../../images/pattern.svg";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   center: {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
   },
   card: {
-    maxWidth: 300,
-    maxHeight: 400,
-    padding: "40px 5px",
+    paddingTop: "20px",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
+    width: "90%",
+    maxHeight: "550px",
     backgroundImage: `url(${pattern})`,
   },
   icons: {
@@ -38,7 +42,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     width: "100%",
   },
-});
+}));
 
 const responsive = {
   desktop: {
@@ -58,17 +62,17 @@ const responsive = {
   },
 };
 
-const GuideCard = ({ data }) => {
+const GuideCard = ({ data, userGuide, beGuideHandler, optOutHandler }) => {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
-    <Box px={4} my={4}>
+    <Box px={4} mt={4}>
       <Typography variant={matches ? "h4" : "h5"}>Guides</Typography>
       <Carousel responsive={responsive}>
         {data.map((guide) => (
-          <Box key={guide.id} py={2}>
+          <Box key={guide.id} py={2} ml={2}>
             <Card className={classes.card}>
               <Box className={classes.center}>
                 <Avatar
@@ -84,17 +88,27 @@ const GuideCard = ({ data }) => {
                   gutterBottom
                   variant="h5"
                   component="h2"
+                  style={{
+                    width: "100%",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
                 >
                   {guide.displayName}
                 </Typography>
                 <Typography
                   variant="body2"
-                  color="textSecondary"
+                  // color="textSecondary"
                   component="p"
                   align="center"
                 >
                   Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
+                  6,000 species, ranging across all continents except
+                  Antarctica. Lizards are a widespread group of squamate
+                  reptiles, with over 6,000 species, ranging across all
+                  continents except Antarctica. Lizards are a widespread group
+                  of squamate reptiles, with over 6,000 species, ranging across.
                 </Typography>
               </CardContent>
               <CardActions>
@@ -120,6 +134,27 @@ const GuideCard = ({ data }) => {
           </Box>
         ))}
       </Carousel>
+      <Box my={2}>
+        {userGuide ? (
+          <Button
+            variant="outlined"
+            color="secondary"
+            size="large"
+            onClick={optOutHandler}
+          >
+            Opt Out
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            onClick={beGuideHandler}
+          >
+            Guide this place
+          </Button>
+        )}
+      </Box>
     </Box>
   );
 };

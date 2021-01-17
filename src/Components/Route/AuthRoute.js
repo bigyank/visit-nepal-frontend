@@ -8,20 +8,20 @@ import LoadingIndicator from "../LoadingIndicator";
 import { getUser } from "../../services/user";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
-  const [userState, userDispatch] = useAuth();
+  const [, userDispatch] = useAuth();
 
   // turned off by default, manual refetch is needed
-  const { error, isLoading, data, refetch } = useQuery("fetchUsers", getUser, {
+  const { error, isLoading, data } = useQuery("fetchUsers", getUser, {
     retry: false,
-    enabled: false,
+    // enabled: false,
   });
 
-  // only fetch user if user is null in user contex
-  useEffect(() => {
-    if (!userState.user) {
-      refetch();
-    }
-  }, [userState, refetch]);
+  // // only fetch user if user is null in user contex
+  // useEffect(() => {
+  //   if (!userState.user) {
+  //     refetch();
+  //   }
+  // }, [userState, refetch]);
 
   // after sucessful fetch update the user contex
   useEffect(() => {

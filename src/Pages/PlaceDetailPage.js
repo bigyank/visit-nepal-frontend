@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, queryCache } from "react-query";
 import { toast } from "react-toastify";
 
 import PlaceDetailHeader from "../Components/PlaceDetail/PlaceDetailHeader";
@@ -9,7 +9,7 @@ import LoadingIndicator from "../Components/LoadingIndicator";
 import GuideCard from "../Components/PlaceDetail/GuideCard";
 
 import { getPlaceDetail } from "../services/place";
-import { beGuide } from "../services/guide";
+import { beGuide, guideOptOut } from "../services/guide";
 
 const PlaceDetail = ({ match }) => {
   const { id } = match.params;
@@ -18,6 +18,7 @@ const PlaceDetail = ({ match }) => {
 
   const [beGuideMutation] = useMutation(beGuide, {
     onSuccess: () => {
+      queryCache.refetchQueries("placeDetail");
       toast.success("you are now a guide");
     },
     onError: (error) => {
@@ -30,7 +31,23 @@ const PlaceDetail = ({ match }) => {
     },
   });
 
-  const beGuideHnadler = () => beGuideMutation(data.id);
+  const [guideOptOutMutation] = useMutation(guideOptOut, {
+    onSuccess: () => {
+      queryCache.refetchQueries("placeDetail");
+      toast.warning("you are removed as a guide");
+    },
+    onError: (error) => {
+      const errMessage =
+        error.response && error.response.data.error
+          ? error.response.data.error.message
+          : error.message;
+
+      toast.error(errMessage);
+    },
+  });
+
+  const beGuideHandler = () => beGuideMutation(data.id);
+  const optOutHandler = () => guideOptOutMutation(data.id);
 
   if (isLoading || !data) return <LoadingIndicator />;
 
@@ -39,8 +56,13 @@ const PlaceDetail = ({ match }) => {
     <>
       <PlaceDetailHeader data={data} />
       <PlaceDetailMap location={data.location} />
-      {data.guides.length === 0 && <NoGuide beGuideHnadler={beGuideHnadler} />}
-      <GuideCard data={data.guides} />
+      {data.guides.length === 0 && <NoGuide beGuideHandler={beGuideHandler} />}
+      <GuideCard
+        data={data.guides}
+        userGuide={data.userGuide}
+        beGuideHandler={beGuideHandler}
+        optOutHandler={optOutHandler}
+      />
       <Review reviews={data.reviews} id={id} />
     </>
   );

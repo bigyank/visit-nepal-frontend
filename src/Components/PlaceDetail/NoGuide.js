@@ -1,3 +1,5 @@
+import { useAuth } from "../../user-contex";
+
 import {
   Box,
   Button,
@@ -11,7 +13,7 @@ import missing from "../../images/missing.png";
 
 const styles = {
   contributeContainer: {
-    height: "40vh",
+    height: "30vh",
     backgroundImage: `url(${missing})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "contain",
@@ -19,7 +21,9 @@ const styles = {
   },
 };
 
-const NoGuide = ({ beGuideHnadler }) => {
+const NoGuide = ({ beGuideHandler }) => {
+  const [{ user: userInfo }] = useAuth();
+
   return (
     <Box m={4}>
       <Paper>
@@ -52,13 +56,23 @@ const NoGuide = ({ beGuideHnadler }) => {
               </Typography>
             </Grid>
             <Grid item>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={beGuideHnadler}
-              >
-                Guide this Destination
-              </Button>
+              {userInfo && userInfo.user.role === "guide" ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={beGuideHandler}
+                >
+                  Guide this Destination
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={beGuideHandler}
+                >
+                  Be a guide
+                </Button>
+              )}
             </Grid>
           </Grid>
         </Grid>

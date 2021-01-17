@@ -12,3 +12,10 @@ export const beGuide = async (id) => {
   );
   return response.data;
 };
+
+export const guideOptOut = async (id) => {
+  const response = await axios.delete(BASE_URL.concat(`/${id}`), {
+    withCredentials: true,
+  });
+  return response.data;
+};
