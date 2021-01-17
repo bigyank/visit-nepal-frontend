@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
-import { useAuth } from "../user-contex";
+import { useAuth } from "../../user-contex";
 import { toast } from "react-toastify";
 
 import {
@@ -24,10 +24,10 @@ import {
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 
-import Rating from "../Components/Rating";
-import DialogBox from "./DialogBox";
+import Rating from "../Rating";
+import DialogBox from "../DialogBox";
 
-import { deletePlace } from "../services/place";
+import { deletePlace } from "../../services/place";
 
 const useStyles = makeStyles({
   paperStyles: {

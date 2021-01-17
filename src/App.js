@@ -21,7 +21,7 @@ import EmailConfirmPage from "./Pages/EmailConfirmPage";
 import PasswordRecoverPage from "./Pages/PasswordRecoverPage";
 import fo0foPage from "./Pages/404page";
 
-import Loading from "./Components/LoadingIndicator";
+import GuideCard from "./Components/PlaceDetail/GuideCard";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -49,7 +49,7 @@ function App() {
         <GuestRoute path="/email/confirm" component={EmailConfirmPage} />
         <GuestRoute path="/password/sucess" component={PasswordRecoverPage} />
         <AuthRoute exact path="/" component={HomePage} />
-        <Route path="/loading" component={Loading} />
+        <Route path="/guide" component={GuideCard} />
         <Route path="*" component={fo0foPage} />
       </Switch>
     </Router>
