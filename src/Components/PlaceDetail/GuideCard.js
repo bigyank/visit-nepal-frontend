@@ -1,3 +1,6 @@
+import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -14,6 +17,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
+
 import MailIcon from "@material-ui/icons/Mail";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
@@ -21,6 +25,7 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import TwitterIcon from "@material-ui/icons/Twitter";
 
 import pattern from "../../images/pattern.svg";
+import { getUser } from "../../services/user";
 
 const useStyles = makeStyles((theme) => ({
   center: {
@@ -29,18 +34,23 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   card: {
+    display: "flex",
+    flexDirection: "column",
     paddingTop: "20px",
     [theme.breakpoints.down("md")]: {
       width: "100%",
     },
     width: "90%",
-    maxHeight: "550px",
+    minHeight: "400px",
     backgroundImage: `url(${pattern})`,
   },
   icons: {
     display: "flex",
     justifyContent: "center",
     width: "100%",
+  },
+  cardAction: {
+    marginTop: "auto",
   },
 }));
 
@@ -62,7 +72,8 @@ const responsive = {
   },
 };
 
-const GuideCard = ({ data, userGuide, beGuideHandler, optOutHandler }) => {
+const GuideCard = ({ data, userGuide, beGuideHandler, optOutHandler, id }) => {
+  const { data: userInfo } = useQuery("userInfo", getUser);
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -103,31 +114,62 @@ const GuideCard = ({ data, userGuide, beGuideHandler, optOutHandler }) => {
                   component="p"
                   align="center"
                 >
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except
-                  Antarctica. Lizards are a widespread group of squamate
-                  reptiles, with over 6,000 species, ranging across all
-                  continents except Antarctica. Lizards are a widespread group
-                  of squamate reptiles, with over 6,000 species, ranging across.
+                  {guide.guideInfo.description}
                 </Typography>
               </CardContent>
-              <CardActions>
+              <CardActions className={classes.cardAction}>
                 <Box className={classes.icons}>
-                  <IconButton aria-label="add to favorites">
-                    <MailIcon />
+                  <IconButton
+                    aria-label="mail"
+                    component={Link}
+                    to={{
+                      pathname: `mailto:${guide.email}`,
+                    }}
+                    target="_blank"
+                  >
+                    <MailIcon style={{ fontSize: "40px" }} />
                   </IconButton>
-                  <IconButton aria-label="share">
-                    <FacebookIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <InstagramIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <LinkedInIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <TwitterIcon />
-                  </IconButton>
+                  {guide.guideInfo.facebook && (
+                    <IconButton aria-label="facebook">
+                      <FacebookIcon style={{ fontSize: "40px" }} />
+                    </IconButton>
+                  )}
+                  {guide.guideInfo.instagram && (
+                    <IconButton
+                      aria-label="instagram"
+                      component={Link}
+                      to={{
+                        pathname: guide.guideInfo.instagram,
+                      }}
+                      target="_blank"
+                    >
+                      <InstagramIcon style={{ fontSize: "40px" }} />
+                    </IconButton>
+                  )}
+                  {guide.guideInfo.linkedin && (
+                    <IconButton
+                      aria-label="linkedin"
+                      component={Link}
+                      to={{
+                        pathname: guide.guideInfo.linkedin,
+                      }}
+                      target="_blank"
+                    >
+                      <LinkedInIcon style={{ fontSize: "40px" }} />
+                    </IconButton>
+                  )}
+                  {guide.guideInfo.twitter && (
+                    <IconButton
+                      aria-label="twitter"
+                      component={Link}
+                      to={{
+                        pathname: guide.guideInfo.twitter,
+                      }}
+                      target="_blank"
+                    >
+                      <TwitterIcon style={{ fontSize: "40px" }} />
+                    </IconButton>
+                  )}
                 </Box>
               </CardActions>
             </Card>
@@ -135,23 +177,34 @@ const GuideCard = ({ data, userGuide, beGuideHandler, optOutHandler }) => {
         ))}
       </Carousel>
       <Box my={2}>
-        {userGuide ? (
-          <Button
-            variant="outlined"
-            color="secondary"
-            size="large"
-            onClick={optOutHandler}
-          >
-            Opt Out
-          </Button>
+        {userInfo && userInfo.role === "guide" ? (
+          userGuide ? (
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="large"
+              onClick={optOutHandler}
+            >
+              Opt Out
+            </Button>
+          ) : (
+            <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              onClick={beGuideHandler}
+            >
+              Guide this place
+            </Button>
+          )
         ) : (
           <Button
-            variant="outlined"
+            variant="contained"
             color="primary"
-            size="large"
-            onClick={beGuideHandler}
+            component={Link}
+            to={`/beguide?redirect=/place/${id}`}
           >
-            Guide this place
+            Be a guide
           </Button>
         )}
       </Box>

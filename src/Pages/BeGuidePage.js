@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BeGuidePage = () => {
+const BeGuidePage = ({ location }) => {
+  const redirect = location.search ? location.search.split("=")[1] : null;
   const history = useHistory();
   const classes = useStyles();
 
@@ -46,8 +47,8 @@ const BeGuidePage = () => {
       data.role !== "guide"
         ? toast.success("you are now a guide")
         : toast.info("profile updated");
-
       queryCache.refetchQueries("userInfo");
+      if (redirect) history.push(redirect);
     },
     onError: (error) => {
       const errMessage =
@@ -61,8 +62,6 @@ const BeGuidePage = () => {
 
   if (isLoading) return <LoadingIndicator />;
   if (error) history.push("/error");
-
-  console.log(data);
 
   const formInitValues = {
     instagram: data ? (data.guideInfo ? data.guideInfo.instagram : "") : "",

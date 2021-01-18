@@ -1,4 +1,5 @@
-import { useAuth } from "../../user-contex";
+import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
 
 import {
   Box,
@@ -10,6 +11,7 @@ import {
 } from "@material-ui/core";
 
 import missing from "../../images/missing.png";
+import { getUser } from "../../services/user";
 
 const styles = {
   contributeContainer: {
@@ -21,8 +23,8 @@ const styles = {
   },
 };
 
-const NoGuide = ({ beGuideHandler }) => {
-  const [{ user: userInfo }] = useAuth();
+const NoGuide = ({ beGuideHandler, id }) => {
+  const { data: userInfo } = useQuery("userInfo", getUser);
 
   return (
     <Box m={4}>
@@ -56,7 +58,7 @@ const NoGuide = ({ beGuideHandler }) => {
               </Typography>
             </Grid>
             <Grid item>
-              {userInfo && userInfo.user.role === "guide" ? (
+              {userInfo && userInfo.role === "guide" ? (
                 <Button
                   variant="contained"
                   color="primary"
@@ -68,7 +70,8 @@ const NoGuide = ({ beGuideHandler }) => {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={beGuideHandler}
+                  component={Link}
+                  to={`/beguide?redirect=/place/${id}`}
                 >
                   Be a guide
                 </Button>

@@ -13,13 +13,12 @@ import { guidePlace, guideOptOut } from "../services/guide";
 
 const PlaceDetail = ({ match }) => {
   const { id } = match.params;
-
   const { isLoading, data } = useQuery(["placeDetail", id], getPlaceDetail);
 
   const [beGuideMutation] = useMutation(guidePlace, {
     onSuccess: () => {
       queryCache.refetchQueries("placeDetail");
-      toast.success("you are now a guide");
+      toast.success("you are now listed as a guide to this place");
     },
     onError: (error) => {
       const errMessage =
@@ -51,18 +50,22 @@ const PlaceDetail = ({ match }) => {
 
   if (isLoading || !data) return <LoadingIndicator />;
 
-  console.log(data);
   return (
     <>
       <PlaceDetailHeader data={data} />
       <PlaceDetailMap location={data.location} />
-      {data.guides.length === 0 && <NoGuide beGuideHandler={beGuideHandler} />}
-      <GuideCard
-        data={data.guides}
-        userGuide={data.userGuide}
-        beGuideHandler={beGuideHandler}
-        optOutHandler={optOutHandler}
-      />
+      {data.guides.length === 0 && (
+        <NoGuide beGuideHandler={beGuideHandler} id={id} />
+      )}
+      {data.guides.length !== 0 && (
+        <GuideCard
+          data={data.guides}
+          userGuide={data.userGuide}
+          beGuideHandler={beGuideHandler}
+          optOutHandler={optOutHandler}
+          id={id}
+        />
+      )}
       <Review reviews={data.reviews} id={id} />
     </>
   );
