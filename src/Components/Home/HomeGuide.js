@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import {
   Paper,
   Grid,
@@ -44,7 +46,12 @@ const HomeGuide = () => {
               </Box>
             </Grid>
             <Grid item>
-              <Button variant="contained" color="primary">
+              <Button
+                component={Link}
+                to="/beguide"
+                variant="contained"
+                color="primary"
+              >
                 Be a Guide
               </Button>
             </Grid>

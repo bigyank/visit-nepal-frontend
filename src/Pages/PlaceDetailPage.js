@@ -9,14 +9,14 @@ import LoadingIndicator from "../Components/LoadingIndicator";
 import GuideCard from "../Components/PlaceDetail/GuideCard";
 
 import { getPlaceDetail } from "../services/place";
-import { beGuide, guideOptOut } from "../services/guide";
+import { guidePlace, guideOptOut } from "../services/guide";
 
 const PlaceDetail = ({ match }) => {
   const { id } = match.params;
 
   const { isLoading, data } = useQuery(["placeDetail", id], getPlaceDetail);
 
-  const [beGuideMutation] = useMutation(beGuide, {
+  const [beGuideMutation] = useMutation(guidePlace, {
     onSuccess: () => {
       queryCache.refetchQueries("placeDetail");
       toast.success("you are now a guide");

@@ -44,12 +44,12 @@ function App() {
           component={PlaceReviewPage}
         />
         <AuthRoute path="/place/:id" component={PlaceDetailPage} />
+        <AuthRoute path="/beguide" component={BeGuide} />
         <AuthRoute path="/notfound" component={NotFoundPage} />
         <AuthRoute path="/error" component={ErrorPage} />
         <GuestRoute path="/email/confirm" component={EmailConfirmPage} />
         <GuestRoute path="/password/sucess" component={PasswordRecoverPage} />
         <AuthRoute exact path="/" component={HomePage} />
-        <Route path="/guide" component={BeGuide} />
         <Route path="*" component={fo0foPage} />
       </Switch>
     </Router>
