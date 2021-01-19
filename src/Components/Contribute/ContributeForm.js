@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, queryCache } from "react-query";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { toast } from "react-toastify";
@@ -56,6 +56,7 @@ const ContributeForm = ({ placeData = {}, placeEdit }) => {
 
   const [mutatePlaces] = useMutation(mutateAction, {
     onSuccess: (data) => {
+      queryCache.refetchQueries("placeDetail");
       toast.success(placeEdit ? "location edited" : "location added");
       history.push(`/place/${data.id}`);
     },
@@ -81,14 +82,22 @@ const ContributeForm = ({ placeData = {}, placeEdit }) => {
       }}
       validationSchema={validator}
       onSubmit={async (values, { setSubmitting }) => {
+        // while adding values.imgage will be null
         if (!values.image) {
           if (values.img) {
             const uploadedImg = await uploadImage(values.img);
             values.img = uploadedImg;
+            // img is compulsory while adding place
           } else {
             toast.error("image is required");
             return;
           }
+          // while editing it should not be null because image is compulsory
+          // but image can be reuploaded so value.img can have value
+        } else if (values.img) {
+          const uploadedImg = await uploadImage(values.img);
+          values.img = uploadedImg;
+          // if image is not reuploaded then just provide the old url
         } else {
           values.img = values.image;
         }
