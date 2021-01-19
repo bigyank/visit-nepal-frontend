@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import AuthRoute from "./Components/Route/AuthRoute";
 import GuestRoute from "./Components/Route/GuestRoute";
 
-import Header from "./Components/Header";
+import Header from "./Components/NavBar/Header";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
@@ -50,7 +50,7 @@ function App() {
         <GuestRoute path="/email/confirm" component={EmailConfirmPage} />
         <GuestRoute path="/password/sucess" component={PasswordRecoverPage} />
         <AuthRoute exact path="/" component={HomePage} />
-        <Route path="*" component={fo0foPage} />
+        <AuthRoute path="*" component={fo0foPage} />
       </Switch>
     </Router>
   );
