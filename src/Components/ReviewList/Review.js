@@ -15,7 +15,7 @@ import { useTheme } from "@material-ui/core/styles";
 
 import ReviewList from "./ReviewList";
 
-import searching from "../../images/searching.png";
+import searching from "../../images/searching.svg";
 
 const styles = {
   searchContainer: {

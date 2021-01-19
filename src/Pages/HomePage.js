@@ -8,6 +8,7 @@ import HomeContribute from "../Components/Home/HomeContribute";
 import HomeGuide from "../Components/Home/HomeGuide";
 import EditorChoice from "../Components/Home/EditorChoice";
 import BestDestination from "../Components/Home/BestDestination";
+import BucketList from "../Components/Home/BucketList";
 
 const Home = () => {
   const theme = useTheme();
@@ -21,6 +22,7 @@ const Home = () => {
       <HomeContribute />
       <HomeGuide />
       <BestDestination />
+      <BucketList />
     </Box>
   );
 };

@@ -1,6 +1,6 @@
 import AlternateCard from "../AlternateCard";
 
-import img from "../../images/map.png";
+import img from "../../images/map.svg";
 const title = "Start sharing your travel ideas";
 const body =
   "Create a Destination to save and share all of your travel destinations, and see them on a map";

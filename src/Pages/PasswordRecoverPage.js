@@ -6,7 +6,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import InfoBox from "../Components/InfoBox";
 
-import reset from "../images/reset.png";
+import reset from "../images/reset.svg";
 
 const createMessage = (matches) => {
   return (

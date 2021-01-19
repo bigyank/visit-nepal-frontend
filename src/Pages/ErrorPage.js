@@ -4,7 +4,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import InfoBox from "../Components/InfoBox";
 
-import error from "../images/error.png";
+import error from "../images/error.svg";
 
 const createMessage = (matches) => {
   return (

@@ -6,7 +6,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import InfoBox from "../Components/InfoBox";
 
-import confirm from "../images/confirm.png";
+import confirm from "../images/confirm.svg";
 
 const createMessage = (matches) => {
   return (
