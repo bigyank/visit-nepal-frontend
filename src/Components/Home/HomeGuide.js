@@ -1,70 +1,13 @@
-import { Link } from "react-router-dom";
+import AlternateCard from "../AlternateCard";
 
-import {
-  Paper,
-  Grid,
-  Box,
-  Typography,
-  Hidden,
-  Button,
-} from "@material-ui/core";
-
-import guide from "../../images/guide.png";
+import img from "../../images/guide.png";
+const title = "Want to be a Guide?";
+const body = "Be a guide and share what you have in you";
+const btn = "Be a Guide";
+const btnLink = "/beguide";
 
 const HomeGuide = () => {
-  const styles = {
-    searchContainer: {
-      height: "40vh",
-      backgroundImage: `url(${guide})`,
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-    },
-  };
-
-  return (
-    <Box mb={6}>
-      <Paper style={{ padding: "20px" }}>
-        <Grid container spacing={4}>
-          <Grid
-            item
-            container
-            xs={12}
-            sm={6}
-            direction="column"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item>
-              <Box mb={2}>
-                <Typography align="center" variant="h5">
-                  Want to be a Guide?
-                </Typography>
-                <Typography align="center" variant={"body1"}>
-                  Be a guide and share what you have in you
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item>
-              <Button
-                component={Link}
-                to="/beguide"
-                variant="contained"
-                color="primary"
-              >
-                Be a Guide
-              </Button>
-            </Grid>
-          </Grid>
-          <Hidden xsDown>
-            <Grid item xs={6}>
-              <Box style={styles.searchContainer}></Box>
-            </Grid>
-          </Hidden>
-        </Grid>
-      </Paper>
-    </Box>
-  );
+  return <AlternateCard {...{ img, title, body, btn, btnLink }} />;
 };
 
 export default HomeGuide;
