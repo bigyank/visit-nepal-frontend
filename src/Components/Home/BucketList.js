@@ -1,10 +1,11 @@
 import AlternateCard from "../AlternateCard";
 
 import img from "../../images/bucket.svg";
-const title = "Want to be a Guide?";
-const body = "Be a guide and share what you have in you";
-const btn = "Be a Guide";
-const btnLink = "/beguide";
+const title = "Create your bucketlist";
+const body =
+  "Add destinations to you bucketlist and customize your travelling experience";
+const btn = "Checkout Bucketlist";
+const btnLink = "/bucketlist";
 
 const BucketList = () => {
   return <AlternateCard {...{ img, title, body, btn, btnLink }} />;
