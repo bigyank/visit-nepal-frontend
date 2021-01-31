@@ -25,9 +25,10 @@ const PasswordRecoverPage = lazy(() => import("./Pages/PasswordRecoverPage"));
 const fo0foPage = lazy(() => import("./Pages/404page"));
 const BeGuide = lazy(() => import("./Pages/BeGuidePage"));
 
-function App() {
-  ReactGA.initialize(process.env.REACT_APP_TRACKING_ID);
+ReactGA.initialize(process.env.REACT_APP_TRACKING_ID);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
+function App() {
   return (
     <Suspense fallback={<LoadingIndicator />}>
       <Router>
