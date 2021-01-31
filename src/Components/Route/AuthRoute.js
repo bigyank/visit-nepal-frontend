@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
+import ReactGA from "react-ga";
 import { useQuery } from "react-query";
 import { useAuth } from "../../user-contex";
 
@@ -28,6 +29,7 @@ const AuthRoute = ({ component: Component, ...rest }) => {
       render={(props) => {
         if (isLoading) return <LoadingIndicator />;
         if (error) return <Redirect to="/login" />;
+        ReactGA.pageview(props.location.pathname);
         return <Route {...rest} component={Component} />;
       }}
     />

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
+import ReactGA from "react-ga";
 import { useQuery } from "react-query";
 import { useAuth } from "../../user-contex";
 
@@ -22,10 +23,13 @@ const GuestRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() => {
+      render={(props) => {
         if (isLoading) return <LoadingIndicator />;
         if (data) return <Redirect to="/" />;
-        if (error) return <Route {...rest} component={Component} />;
+        if (error) {
+          ReactGA.pageview(props.location.pathname);
+          return <Route {...rest} component={Component} />;
+        }
       }}
     />
   );

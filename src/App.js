@@ -1,9 +1,10 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-import ReactGA from "react-ga";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingIndicator from "./Components/LoadingIndicator";
+
+import ReactGA from "react-ga";
 
 const AuthRoute = lazy(() => import("./Components/Route/AuthRoute"));
 const GuestRoute = lazy(() => import("./Components/Route/GuestRoute"));
@@ -25,10 +26,11 @@ const PasswordRecoverPage = lazy(() => import("./Pages/PasswordRecoverPage"));
 const fo0foPage = lazy(() => import("./Pages/404page"));
 const BeGuide = lazy(() => import("./Pages/BeGuidePage"));
 
-ReactGA.initialize(process.env.REACT_APP_TRACKING_ID);
-ReactGA.pageview(window.location.pathname + window.location.search);
-
 function App() {
+  useEffect(() => {
+    ReactGA.initialize(process.env.REACT_APP_TRACKING_ID);
+  }, []);
+
   return (
     <Suspense fallback={<LoadingIndicator />}>
       <Router>
