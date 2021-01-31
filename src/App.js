@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
+import ReactGA from "react-ga";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingIndicator from "./Components/LoadingIndicator";
@@ -25,6 +26,8 @@ const fo0foPage = lazy(() => import("./Pages/404page"));
 const BeGuide = lazy(() => import("./Pages/BeGuidePage"));
 
 function App() {
+  ReactGA.initialize(process.env.REACT_APP_TRACKING_ID);
+
   return (
     <Suspense fallback={<LoadingIndicator />}>
       <Router>
