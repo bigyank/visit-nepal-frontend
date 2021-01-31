@@ -28,7 +28,7 @@ const BeGuide = lazy(() => import("./Pages/BeGuidePage"));
 
 function App() {
   useEffect(() => {
-    ReactGA.initialize("UA-188526708-2");
+    ReactGA.initialize(process.env.REACT_APP_TRACKING_ID);
   }, []);
 
   return (
