@@ -10,14 +10,7 @@ import {
   Grid,
   Typography,
   Divider,
-  Avatar,
-  TableContainer,
   makeStyles,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
   Button,
   ButtonGroup,
 } from "@material-ui/core";
@@ -27,6 +20,7 @@ import { useTheme } from "@material-ui/core/styles";
 import Rating from "../Rating";
 import DialogBox from "../DialogBox";
 import BucketListBtn from "./BucketListBtn";
+import AuthorTable from "./AuthorTable";
 
 import { deletePlace } from "../../services/place";
 
@@ -157,49 +151,20 @@ const PlaceDetailHeader = ({ data }) => {
 
               <Divider style={{ marginBottom: "0.5em" }} />
 
-              <Rating
-                rating={data.rating}
-                numReviews={data.numReviews}
-                fontSize="large"
-              />
-
+              <Box mt={1}>
+                <Rating
+                  rating={data.rating}
+                  numReviews={data.numReviews}
+                  fontSize="large"
+                />
+              </Box>
               <Typography
                 variant="subtitle1"
                 className={classes.typographyStyles}
               >
                 {data.description}
               </Typography>
-            </Grid>
-
-            <Grid item>
-              <Box display={{ xs: "none", sm: "block" }}>
-                <Typography className={classes.typographyStyles}>
-                  Created By
-                </Typography>
-                <TableContainer component={Paper}>
-                  <Table aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Display Picture</TableCell>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Created At</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell component="th" scope="row">
-                          <Avatar
-                            alt={data.author.displayName}
-                            src={data.author.displayPicture}
-                          />
-                        </TableCell>
-                        <TableCell>{data.author.displayName}</TableCell>
-                        <TableCell>{data.createdAt}</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Box>
+              <AuthorTable data={data} classes={classes} />
             </Grid>
           </Grid>
         </Grid>

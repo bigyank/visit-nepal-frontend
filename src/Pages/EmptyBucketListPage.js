@@ -6,29 +6,30 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import InfoBox from "../Components/InfoBox";
 
-import empty from "../images/empty_street.svg";
+import empty from "../images/empty.svg";
 
 const createMessage = (matches) => {
   return (
     <>
       <Typography variant={matches ? "h5" : "body1"} align="center">
-        Sorry, We could not find the destination
+        Sorry, Your Bucketlist is currently empty
       </Typography>
       <Typography variant={matches ? "body1" : "body2"} align="center">
-        Please be more specific or{" "}
-        <Link to={`/contribute`} component={RouterLink}>
-          contribute
+        You can find destinations in the{" "}
+        <Link to={`/explore`} component={RouterLink}>
+          Explore{" "}
         </Link>
+        page
       </Typography>
     </>
   );
 };
 
-const NotFoundPage = () => {
+const EmptyBucketListPage = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const message = createMessage(matches);
   return <InfoBox image={empty} message={message} />;
 };
 
-export default NotFoundPage;
+export default EmptyBucketListPage;

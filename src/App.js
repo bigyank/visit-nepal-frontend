@@ -14,6 +14,7 @@ const LoginPage = lazy(() => import("./Pages/LoginPage"));
 const SignupPage = lazy(() => import("./Pages/SignupPage"));
 const ExplorePage = lazy(() => import("./Pages/ExplorePage"));
 const ContributePage = lazy(() => import("./Pages/ContributePage"));
+const BucketListPage = lazy(() => import("./Pages/BucketListPage"));
 const ForgotPassPage = lazy(() => import("./Pages/ForgotPassPage"));
 const ResetPassPage = lazy(() => import("./Pages/ResetPassPage"));
 const PlaceDetailPage = lazy(() => import("./Pages/PlaceDetailPage"));
@@ -54,6 +55,7 @@ function App() {
             component={PlaceReviewPage}
           />
           <AuthRoute path="/place/:id" component={PlaceDetailPage} />
+          <AuthRoute path="/bucketlist" component={BucketListPage} />
           <AuthRoute path="/beguide" component={BeGuide} />
           <AuthRoute path="/notfound" component={NotFoundPage} />
           <AuthRoute path="/error" component={ErrorPage} />

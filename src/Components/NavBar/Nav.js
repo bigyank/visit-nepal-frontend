@@ -55,6 +55,9 @@ const Header = ({ toggleDrawer, handleLogout, user }) => {
                 <Button component={Link} to="/contribute" color="inherit">
                   Contribute
                 </Button>
+                <Button component={Link} to="/bucketlist" color="inherit">
+                  Bucket List
+                </Button>
                 <Button onClick={handleLogout} color="inherit">
                   Logout
                 </Button>

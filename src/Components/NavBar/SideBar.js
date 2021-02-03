@@ -10,6 +10,7 @@ import AddLocationIcon from "@material-ui/icons/AddLocation";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
+import BookIcon from "@material-ui/icons/Book";
 
 import SideBarList from "./SideBarList";
 
@@ -44,6 +45,11 @@ export default function SideBar({ toggleDrawer, state, handleLogout, user }) {
                 Icon={AddLocationIcon}
                 text="Contribute"
                 lnk="/contribute"
+              />
+              <SideBarList
+                Icon={BookIcon}
+                text="Bucket List"
+                lnk="/bucketlist"
               />
               <SideBarList
                 Icon={ExitToAppIcon}
