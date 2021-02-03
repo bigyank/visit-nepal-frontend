@@ -26,6 +26,7 @@ import { useTheme } from "@material-ui/core/styles";
 
 import Rating from "../Rating";
 import DialogBox from "../DialogBox";
+import BucketListBtn from "./BucketListBtn";
 
 import { deletePlace } from "../../services/place";
 
@@ -134,13 +135,27 @@ const PlaceDetailHeader = ({ data }) => {
               <Box>
                 <Divider />
               </Box>
-              <Typography
-                variant="h6"
-                color="textSecondary"
-                className={classes.typographyStyles}
+              <Grid
+                item
+                container
+                justify="space-between"
+                alignItems="center"
+                style={{ margin: "0.5em 0" }}
               >
-                {data.type}
-              </Typography>
+                <Typography
+                  variant="h6"
+                  color="textSecondary"
+                  className={classes.typographyStyles}
+                >
+                  {data.type}
+                </Typography>
+                <BucketListBtn
+                  inBucketList={data.inBucketList}
+                  placeId={data.id}
+                />
+              </Grid>
+
+              <Divider style={{ marginBottom: "0.5em" }} />
 
               <Rating
                 rating={data.rating}
