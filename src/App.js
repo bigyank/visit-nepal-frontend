@@ -26,6 +26,7 @@ const EmailConfirmPage = lazy(() => import("./Pages/EmailConfirmPage"));
 const PasswordRecoverPage = lazy(() => import("./Pages/PasswordRecoverPage"));
 const fo0foPage = lazy(() => import("./Pages/404page"));
 const BeGuide = lazy(() => import("./Pages/BeGuidePage"));
+const TablePage = lazy(() => import("./Pages/TablePage"));
 
 function App() {
   useEffect(() => {
@@ -54,6 +55,7 @@ function App() {
             path="/place/:id/:action/review"
             component={PlaceReviewPage}
           />
+          <AuthRoute path="/table" component={TablePage} />
           <AuthRoute path="/place/:id" component={PlaceDetailPage} />
           <AuthRoute path="/bucketlist" component={BucketListPage} />
           <AuthRoute path="/beguide" component={BeGuide} />

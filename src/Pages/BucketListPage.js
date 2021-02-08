@@ -11,7 +11,6 @@ const PlaceDetail = () => {
 
   if (isLoading || !data) return <LoadingIndicator />;
 
-  console.log(data);
   if (data.length === 0) return <EmptyBucketListPage />;
 
   return <BucketLayout bucketListItems={data} />;

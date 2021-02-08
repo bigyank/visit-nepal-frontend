@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BucketCard = ({ data }) => {
-  console.log(data);
   const classes = useStyles();
 
   return (

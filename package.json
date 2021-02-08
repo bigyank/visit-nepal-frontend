@@ -16,6 +16,7 @@
     "formik": "^2.2.5",
     "formik-material-ui": "^3.0.1",
     "leaflet": "^1.7.1",
+    "material-table": "^1.69.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-ga": "^3.3.0",
