@@ -26,7 +26,7 @@ const EmailConfirmPage = lazy(() => import("./Pages/EmailConfirmPage"));
 const PasswordRecoverPage = lazy(() => import("./Pages/PasswordRecoverPage"));
 const fo0foPage = lazy(() => import("./Pages/404page"));
 const BeGuide = lazy(() => import("./Pages/BeGuidePage"));
-const TablePage = lazy(() => import("./Pages/TablePage"));
+const AdminUsersPage = lazy(() => import("./Pages/AdminUsersPage"));
 
 function App() {
   useEffect(() => {
@@ -47,6 +47,7 @@ function App() {
             component={ForgotPassPage}
           />
           <GuestRoute path="/password/recover/:id" component={ResetPassPage} />
+          <AuthRoute path="/admin/users" component={AdminUsersPage} />
           <AuthRoute path="/explore" component={ExplorePage} />
           <AuthRoute path="/contribute" component={ContributePage} />
           <AuthRoute path="/place/edit/:id" component={PlaceEditPage} />
@@ -55,7 +56,6 @@ function App() {
             path="/place/:id/:action/review"
             component={PlaceReviewPage}
           />
-          <AuthRoute path="/table" component={TablePage} />
           <AuthRoute path="/place/:id" component={PlaceDetailPage} />
           <AuthRoute path="/bucketlist" component={BucketListPage} />
           <AuthRoute path="/beguide" component={BeGuide} />

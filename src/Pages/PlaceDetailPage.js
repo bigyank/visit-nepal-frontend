@@ -8,12 +8,20 @@ import Review from "../Components/ReviewList/Review";
 import LoadingIndicator from "../Components/LoadingIndicator";
 import GuideCard from "../Components/PlaceDetail/GuideCard";
 
+import NotFoundPage from "./NotFoundPage";
+
 import { getPlaceDetail } from "../services/place";
 import { guidePlace, guideOptOut } from "../services/guide";
 
 const PlaceDetail = ({ match }) => {
   const { id } = match.params;
-  const { isLoading, data } = useQuery(["placeDetail", id], getPlaceDetail);
+  const { isLoading, data, error } = useQuery(
+    ["placeDetail", id],
+    getPlaceDetail,
+    {
+      retry: false,
+    }
+  );
 
   const [beGuideMutation] = useMutation(guidePlace, {
     onSuccess: () => {
@@ -47,6 +55,8 @@ const PlaceDetail = ({ match }) => {
 
   const beGuideHandler = () => beGuideMutation(data.id);
   const optOutHandler = () => guideOptOutMutation(data.id);
+
+  if (error) return <NotFoundPage />;
 
   if (isLoading || !data) return <LoadingIndicator />;
 

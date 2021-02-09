@@ -2,8 +2,11 @@ import { useQuery, useMutation, queryCache } from "react-query";
 import MaterialTable from "material-table";
 import { toast } from "react-toastify";
 import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
 import LoadingIndicator from "../Components/LoadingIndicator";
 import { tableIcons } from "../Components/Table/TableIconsFull";
+
+import Fo0FoPage from "./404page";
 
 import { getAllUser, deleteUser, updateUser } from "../services/admin";
 
@@ -38,11 +41,18 @@ const TablePage = () => {
     },
   });
 
-  const { isLoading, data } = useQuery("adminGetAllUser", getAllUser);
+  const { isLoading, data, error } = useQuery("adminGetAllUser", getAllUser, {
+    retry: false,
+  });
+
+  if (error) {
+    return <Fo0FoPage />;
+  }
+
   if (isLoading || !data) return <LoadingIndicator />;
 
   return (
-    <div>
+    <Box mt={2}>
       <MaterialTable
         icons={tableIcons}
         title="All Users"
@@ -57,11 +67,12 @@ const TablePage = () => {
           { title: "Full Name", field: "displayName", type: "string" },
           { title: "Email", field: "email", type: "string" },
           { title: "Verified", field: "verified", type: "boolean" },
+          { title: "Admin", field: "isAdmin", type: "boolean" },
           {
             title: "Role",
             field: "role",
             type: "string",
-            lookup: { traveller: "traveller", guide: "guide", admin: "admin" },
+            lookup: { traveller: "traveller", guide: "guide" },
           },
           { title: "Created At", field: "createdAt", type: "datetime" },
           { title: "Last Updated", field: "updatedAt", type: "datetime" },
@@ -72,10 +83,11 @@ const TablePage = () => {
         }}
         editable={{
           onRowDelete: (oldData) => mutateDeleteUserAdmin(oldData.id),
-          onRowUpdate: (newData) => mutateUpdateUserAdmin(newData),
+          onRowUpdate: (newData, oldData) =>
+            mutateUpdateUserAdmin({ newData, oldData }),
         }}
       />
-    </div>
+    </Box>
   );
 };
 

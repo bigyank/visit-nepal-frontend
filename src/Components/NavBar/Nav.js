@@ -6,8 +6,16 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import { Box, Grid, IconButton, Hidden } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  IconButton,
+  Hidden,
+  Menu,
+  MenuItem,
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +31,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = ({ toggleDrawer, handleLogout, user }) => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   if (user === null) return null;
 
@@ -46,6 +63,45 @@ const Header = ({ toggleDrawer, handleLogout, user }) => {
           <Hidden smDown>
             {user && user.user ? (
               <>
+                {user.user.isAdmin && (
+                  <>
+                    <Button
+                      color="inherit"
+                      aria-controls="simple-menu"
+                      aria-haspopup="true"
+                      onClick={handleClick}
+                    >
+                      Admin
+                    </Button>
+                    <Menu
+                      id="admin-menu"
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={Boolean(anchorEl)}
+                      onClose={handleClose}
+                    >
+                      <MenuItem
+                        onClick={handleClose}
+                        component={Link}
+                        to="/admin/users"
+                      >
+                        Users
+                      </MenuItem>
+                      <MenuItem
+                        onClick={handleClose}
+                        component={Link}
+                        to="/admin/places"
+                      >
+                        Destinations
+                      </MenuItem>
+                    </Menu>
+                  </>
+                )}
+                {user.user.role === "guide" && (
+                  <Button component={Link} to="/beguide" color="inherit">
+                    Guide
+                  </Button>
+                )}
                 <Button component={Link} to="/" color="inherit">
                   Home
                 </Button>

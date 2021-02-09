@@ -20,10 +20,10 @@ export const deleteUser = async (id) => {
   return response.data;
 };
 
-export const updateUser = async (updatedData) => {
+export const updateUser = async (data) => {
   const response = await axios.put(
-    BASE_URL.concat(`/users/${updatedData.id}`),
-    updatedData,
+    BASE_URL.concat(`/users/${data.newData.id}`),
+    data,
     {
       withCredentials: true,
     }

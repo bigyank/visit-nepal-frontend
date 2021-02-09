@@ -11,8 +11,12 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import BookIcon from "@material-ui/icons/Book";
+import PeopleIcon from "@material-ui/icons/People";
+import ExploreIcon from "@material-ui/icons/Explore";
+import NearMeIcon from "@material-ui/icons/NearMe";
 
 import SideBarList from "./SideBarList";
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles({
   list: {
@@ -39,6 +43,21 @@ export default function SideBar({ toggleDrawer, state, handleLogout, user }) {
         {user ? (
           user.user ? (
             <>
+              {user.user.isAdmin && (
+                <>
+                  <SideBarList
+                    Icon={PeopleIcon}
+                    text="Users"
+                    lnk="/admin/users"
+                  />
+                  <SideBarList
+                    Icon={ExploreIcon}
+                    text="Destinations"
+                    lnk="/admin/places"
+                  />
+                  <Divider />
+                </>
+              )}
               <SideBarList Icon={HomeIcon} text="Home" lnk="/" />
               <SideBarList Icon={PublicIcon} text="Explore" lnk="/explore" />
               <SideBarList
@@ -46,11 +65,16 @@ export default function SideBar({ toggleDrawer, state, handleLogout, user }) {
                 text="Contribute"
                 lnk="/contribute"
               />
+              <Divider />
+              {user.user.role === "guide" && (
+                <SideBarList Icon={NearMeIcon} text="Guide" lnk="/beguide" />
+              )}
               <SideBarList
                 Icon={BookIcon}
                 text="Bucket List"
                 lnk="/bucketlist"
               />
+              <Divider />
               <SideBarList
                 Icon={ExitToAppIcon}
                 text="Logout"
