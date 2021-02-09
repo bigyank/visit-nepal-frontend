@@ -8,3 +8,25 @@ export const getAllUser = async () => {
   });
   return response.data;
 };
+
+export const deleteUser = async (id) => {
+  const response = await axios.delete(
+    BASE_URL.concat(`/users/${id}`),
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
+
+export const updateUser = async (updatedData) => {
+  const response = await axios.put(
+    BASE_URL.concat(`/users/${updatedData.id}`),
+    updatedData,
+    {
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};

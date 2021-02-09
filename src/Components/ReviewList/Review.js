@@ -83,24 +83,15 @@ const Review = ({ reviews, id }) => {
             </Hidden>
           </Grid>
         )}
-      </Box>
-      {reviews.length !== 0 && (
-        <Box
-          m={matches ? 4 : 0}
-          p={4}
-          width="95%"
-          bgcolor="white.500"
-          border={1}
-          borderColor="grey.300"
-        >
+        {reviews.length !== 0 && (
           <Pagination
             color="primary"
             count={Math.ceil(reviews.length / postsPerPage)}
             page={currentPage}
             onChange={(_event, pnumber) => setCurrentPage(pnumber)}
           />
-        </Box>
-      )}
+        )}
+      </Box>
     </Grid>
   );
 };

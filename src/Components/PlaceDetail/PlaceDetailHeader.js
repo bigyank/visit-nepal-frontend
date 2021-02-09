@@ -148,9 +148,7 @@ const PlaceDetailHeader = ({ data }) => {
                   placeId={data.id}
                 />
               </Grid>
-
               <Divider style={{ marginBottom: "0.5em" }} />
-
               <Box mt={1}>
                 <Rating
                   rating={data.rating}
