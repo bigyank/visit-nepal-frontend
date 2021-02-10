@@ -6,8 +6,9 @@ import {
   Popup,
   useMapEvent,
 } from "react-leaflet";
-
 import { Link } from "@material-ui/core";
+
+import { greenIcon, redIcon, goldIcon } from "./MapIcons";
 
 const Map = ({ data }) => {
   function SetViewOnClick() {
@@ -32,7 +33,17 @@ const Map = ({ data }) => {
           url={`https://api.mapbox.com/styles/v1/${process.env.REACT_APP_MAPBOX_USERNAME}/${process.env.REACT_APP_MAPBOX_STYLE_ID}/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`}
         />
         {data.map((info, index) => (
-          <Marker key={index} position={info.location}>
+          <Marker
+            key={index}
+            position={info.location}
+            icon={
+              info.type === "religious"
+                ? greenIcon
+                : info.type === "landmark"
+                ? goldIcon
+                : redIcon
+            }
+          >
             <Popup>
               <div style={{ width: "300px", height: "auto" }}>
                 <h2>{info.name}</h2>
