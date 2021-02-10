@@ -27,6 +27,7 @@ const PasswordRecoverPage = lazy(() => import("./Pages/PasswordRecoverPage"));
 const fo0foPage = lazy(() => import("./Pages/404page"));
 const BeGuide = lazy(() => import("./Pages/BeGuidePage"));
 const AdminUsersPage = lazy(() => import("./Pages/AdminUsersPage"));
+const AdminPlacePage = lazy(() => import("./Pages/AdminPlacePage"));
 
 function App() {
   useEffect(() => {
@@ -48,6 +49,7 @@ function App() {
           />
           <GuestRoute path="/password/recover/:id" component={ResetPassPage} />
           <AuthRoute path="/admin/users" component={AdminUsersPage} />
+          <AuthRoute path="/admin/places" component={AdminPlacePage} />
           <AuthRoute path="/explore" component={ExplorePage} />
           <AuthRoute path="/contribute" component={ContributePage} />
           <AuthRoute path="/place/edit/:id" component={PlaceEditPage} />

@@ -10,7 +10,7 @@ import Fo0FoPage from "./404page";
 
 import { getAllUser, deleteUser, updateUser } from "../services/admin";
 
-const TablePage = () => {
+const AdminUsersPlace = () => {
   const [mutateDeleteUserAdmin] = useMutation(deleteUser, {
     onSuccess: () => {
       queryCache.refetchQueries("adminGetAllUser");
@@ -91,4 +91,4 @@ const TablePage = () => {
   );
 };
 
-export default TablePage;
+export default AdminUsersPlace;
