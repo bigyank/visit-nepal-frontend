@@ -1,5 +1,4 @@
 import { Link as RouterLink } from "react-router-dom";
-import { useQuery } from "react-query";
 import {
   MapContainer,
   TileLayer,
@@ -10,11 +9,7 @@ import {
 
 import { Link } from "@material-ui/core";
 
-import LoadingIndicator from "./LoadingIndicator";
-
-import { getAllPlaces } from "../services/place";
-
-const Map = () => {
+const Map = ({ data }) => {
   function SetViewOnClick() {
     const map = useMapEvent("click", (e) => {
       map.setView(e.latlng, map.getZoom(), {
@@ -25,15 +20,10 @@ const Map = () => {
     return null;
   }
 
-  const { isLoading, data } = useQuery("places", getAllPlaces);
-
-  // seems like data becomes undefined just for a second after login
-  if (isLoading || !data) return <LoadingIndicator />;
-
   return (
     <div>
       <MapContainer
-        style={{ height: "90vh", width: "100%" }}
+        style={{ height: "93.2vh", width: "100%", zIndex: 0 }}
         center={[27.7172, 85.324]}
         zoom={13}
       >
