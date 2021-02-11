@@ -9,7 +9,7 @@ const BucketLayout = ({ bucketListItems }) => {
         <Grid item xs={10} md={8}>
           <Grid container item spacing={2}>
             {bucketListItems.map((data) => (
-              <Grid key={data.id} item xs={12} sm={6} md={4}>
+              <Grid key={data.place.id} item xs={12} sm={6} md={4}>
                 <BucketCard data={data} />
               </Grid>
             ))}

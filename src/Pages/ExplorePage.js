@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     marginLeft: "auto",
     marginRight: "auto",
     zIndex: 2,
-    width: 500,
+    maxWidth: 500,
   },
 });
 

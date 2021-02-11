@@ -30,3 +30,15 @@ export const removePlaceFromBucketList = async (id) => {
   );
   return response.data;
 };
+
+export const updateBucketItem = async (data) => {
+  const { id, status } = data;
+  const response = await axios.put(
+    BASE_URL.concat(`/${id}`),
+    { status },
+    {
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
